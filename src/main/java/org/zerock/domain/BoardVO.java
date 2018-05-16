@@ -35,6 +35,8 @@ public class BoardVO {
 
 		// 실시간 녹화방송
 		
+
+		//pull~~~~
  
 		//poohpoohpooh 원투쓰리 첵첵
 
