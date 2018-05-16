@@ -130,6 +130,8 @@ pink
 			<div class="center">
 				<ul class="pagination">
 
+
+
 					<c:if test="${pageMaker.prev}">
 						<li><a href="list?page=${pageMaker.start-10}"
 							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
