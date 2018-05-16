@@ -10,9 +10,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/resources/assets/css/main.css" />
 <style>
-.search1{
-text-align:center;
+.search1 {
+	text-align: center;
 }
+
 .outer {
 	padding: 5%;
 	background-color: #ffffff;
@@ -43,22 +44,36 @@ text-align:center;
 	color: white;
 }
 
-.pagination a:hover:not (
-.active ){
-	background-color: pink;
-}
+.pagination
+ 
+a
+:hover
+:not
+ 
+(
+.active
+ 
+){
+background-color
+:
+ 
+pink
+;
 
+
+}
 .search {
 	width: 33%;
 	margin-left: 33%;
-	}
+}
+
 .box {
 	display: block;
 	background-color: transparent;
 	overflow: hidden;
 	padding-right: 50px;
 	white-space: nowrap;
-	margin-bottom:0;
+	margin-bottom: 0;
 }
 
 .title {
@@ -75,35 +90,25 @@ text-align:center;
 	vertical-align: middle;
 }
 
-.qbtn{
-width: 100%;
-
-left: 35%;
-
-
-}
-.sbtn{
-width: 25%;
-position: relative;
- float: left; 
+.qbtn {
+	width: 100%;
+	left: 35%;
 
 }
 
-.rbtn{
-width: 25%;
-position:relative;
-
-float: left; 
-
-
+.sbtn {
+	width: 100%;
+	position: relative;
 }
-.select-wrapper{
-width: 15%;
-position:absolute;
-float: left; 
+
+.row uniform {
+	width: 50%;
 
 }
 
+.rbtn {
+	width: 25%;
+}
 </style>
 </head>
 <body class="subpage">
@@ -160,19 +165,17 @@ float: left;
 								<td><c:out value="${vo.bno}" /></td>
 
 
-								<td class="box">
-										<span class="title"> <c:out value="${vo.title}" />
-										</span> <span class="ico"> <c:if test="${vo.newIcon==1}">
-												<img src="/resources/images/new.gif">
-											</c:if>
-										</span>
-									</div>
-
-								</td>
+								<td class="box"><span class="title"> <c:out
+											value="${vo.title}" />
+								</span> <span class="ico"> <c:if test="${vo.checkNew()}">
+											<img src="/resources/images/new.gif">
+										</c:if>
+								</span>
+									</div></td>
 								<td><c:out value="${vo.writer}" /></td>
-								<td style="text-align: right"><c:if test="${vo.newIcon==1}">
+								<td style="text-align: right"><c:if test="${vo.checkNew()}">
 										<fmt:formatDate value="${vo.regdate}" pattern="HH:mm:ss" />
-									</c:if> <c:if test="${vo.newIcon!=1}">
+									</c:if> <c:if test="${!vo.checkNew()}">
 										<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd" />
 									</c:if></td>
 							</tr>
@@ -195,14 +198,14 @@ float: left;
 				</div>
 			</div>
 			<div class="search1">
-			
-			<div class="row uniform"  >
-			
-			
+
+				<div class="row uniform">
+
+
 					<div class="3u 12u$(small)">
 						<div class="select-wrapper">
-							<select name="category" id="category">
-							<	<option value="">- Category -</option>
+							<select name="category" id="category"> <
+								<option value="">- Category -</option>
 								<option value="1">title</option>
 								<option value="1">content</option>
 								<option value="1">writer</option>
@@ -211,79 +214,53 @@ float: left;
 							</select>
 						</div>
 					</div>
-					<div class="3u 12u$(small)">
-					<div class="qbtn">
-						<input type="text" name="query" id="query" value=""
-							placeholder="Query" />
-							</div>
+					<div class="4u 12u$(small)">
+						<div class="qbtn">
+							<input type="text" name="query" id="query" value=""
+								placeholder="Query" />
+						</div>
 					</div>
 					<div>
-					<form  method="post" action="#" >
-					
-					<div class="3u$ 12u$(small)">
-						<input type="submit" value="Search"  />
-					
-					</div>
-					</form>
+						<form method="post" action="#">
+
+							<div class="6u$ 12u$(small)">
+								<input type="submit" value="Search" />
+								
+
+							</div>
+						</form>
 					</div>
 					<div class="rbtn">
-		<form  method="post" action="#" >
-					
-				<a href="register" class="button">Register</a>
-			
-			</form>
-			</div>
+						
+						<a href="register" class="button fit">Register</a>
+
+				
+					</div>
 				</div>
 			</div>
-			</div>
-			
-			<!-- <!-- Break -->
-			<!-- <div class="search">
-                <div class="6u 12u$(xsmall)">
-                    <div class="select-wrapper">
-                        <select name="category" id="category">
-                            <option value="">- Category -</option>
-                            <option value="1">Manufacturing</option>
-                            <option value="1">Shipping</option>
-                            <option value="1">Administration</option>
-                            <option value="1">Human Resources</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="6u 12u$(xsmall)">
-                    <form method="post" action="#">
-                        <div style="float: left; width: 70%">
-                            <input type="text" name="query" id="query" value=""
-                                placeholder="Query" />
-                        </div>
-                        <div style="float: left; width: 30%">
-                            <input type="submit" value="Search" />
-                        </div>
-                    </form>
-                </div>
-            </div> -->
 		</div>
-		<!-- Footer -->
-		<footer id="footer">
-			<div class="container">
-				<ul class="icons">
-					<li><a href="#" class="icon fa-twitter"><span
-							class="label">Twitter</span></a></li>
-					<li><a href="#" class="icon fa-facebook"><span
-							class="label">Facebook</span></a></li>
-					<li><a href="#" class="icon fa-instagram"><span
-							class="label">Instagram</span></a></li>
-					<li><a href="#" class="icon fa-envelope-o"><span
-							class="label">Email</span></a></li>
-				</ul>
-			</div>
-			<div class="copyright">&copy; Untitled. All rights reserved.</div>
-		</footer>
-		<!-- Scripts -->
-		<script src="/resources/assets/js/jquery.min.js"></script>
-		<script src="/resources/assets/js/jquery.scrollex.min.js"></script>
-		<script src="/resources/assets/js/skel.min.js"></script>
-		<script src="/resources/assets/js/util.js"></script>
-		<script src="/resources/assets/js/main.js"></script>
+
+	</div>
+	<!-- Footer -->
+	<footer id="footer">
+		<div class="container">
+			<ul class="icons">
+				<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+				<li><a href="#" class="icon fa-facebook"><span
+						class="label">Facebook</span></a></li>
+				<li><a href="#" class="icon fa-instagram"><span
+						class="label">Instagram</span></a></li>
+				<li><a href="#" class="icon fa-envelope-o"><span
+						class="label">Email</span></a></li>
+			</ul>
+		</div>
+		<div class="copyright">&copy; Untitled. All rights reserved.</div>
+	</footer>
+	<!-- Scripts -->
+	<script src="/resources/assets/js/jquery.min.js"></script>
+	<script src="/resources/assets/js/jquery.scrollex.min.js"></script>
+	<script src="/resources/assets/js/skel.min.js"></script>
+	<script src="/resources/assets/js/util.js"></script>
+	<script src="/resources/assets/js/main.js"></script>
 </body>
 </html>

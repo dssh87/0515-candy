@@ -39,4 +39,18 @@ public class BoardController {
 	public void register() {
 		
 	}
+	
+	
+	@GetMapping("/view")
+	public void view() {
+		
+	}
+	@GetMapping("/index")
+	public void index() {
+		
+	}
+	@GetMapping("/generic")
+	public void generic() {
+		
+	}
 }

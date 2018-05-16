@@ -11,13 +11,13 @@
 		<title>Hielo by TEMPLATED</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="resources/assets/css/main.css" />
+		<link rel="stylesheet" href="/resources/assets/css/main.css" />
 	</head>
 	<body>
 
 		<!-- Header -->
 			<header id="header" class="alt">
-				<div class="logo"><a href="index">Hielo <span>by TEMPLATED</span></a></div>
+				<div class="logo"><a href="/index">Hielo <span>by TEMPLATED</span></a></div>
 				<a href="#menu">Menu</a>
 			</header>
 
@@ -34,7 +34,7 @@
 		<!-- Banner -->
 			<section class="banner full">
 				<article>
-					<img src="resources/images/slide01.jpg" alt="" />
+					<img src="/resources/images/slide01.jpg" alt="" />
 					<div class="inner">
 						<header>
 							<p>A free responsive web site template by <a href="https://templated.co">TEMPLATED</a></p>
@@ -43,7 +43,7 @@
 					</div>
 				</article>
 				<article>
-					<img src="resources/images/slide02.jpg" alt="" />
+					<img src="/resources/images/slide02.jpg" alt="" />
 					<div class="inner">
 						<header>
 							<p>Lorem ipsum dolor sit amet nullam feugiat</p>
@@ -52,7 +52,7 @@
 					</div>
 				</article>
 				<article>
-					<img src="resources/images/slide03.jpg"  alt="" />
+					<img src="/resources/images/slide03.jpg"  alt="" />
 					<div class="inner">
 						<header>
 							<p>Sed cursus aliuam veroeros lorem ipsum nullam</p>
@@ -61,7 +61,7 @@
 					</div>
 				</article>
 				<article>
-					<img src="resources/images/slide04.jpg"  alt="" />
+					<img src="/resources/images/slide04.jpg"  alt="" />
 					<div class="inner">
 						<header>
 							<p>Adipiscing lorem ipsum feugiat sed phasellus consequat</p>
@@ -70,7 +70,7 @@
 					</div>
 				</article>
 				<article>
-					<img src="resources/images/slide05.jpg"  alt="" />
+					<img src="/resources/images/slide05.jpg"  alt="" />
 					<div class="inner">
 						<header>
 							<p>Ipsum dolor sed magna veroeros lorem ipsum</p>
@@ -88,7 +88,7 @@
 						<div>
 							<div class="box">
 								<div class="image fit">
-									<img src="resources/images/pic02.jpg" alt="" />
+									<img src="/resources/images/pic02.jpg" alt="" />
 								</div>
 								<div class="content">
 									<header class="align-center">
@@ -106,7 +106,7 @@
 						<div>
 							<div class="box">
 								<div class="image fit">
-									<img src="resources/images/pic03.jpg" alt="" />
+									<img src="/resources/images/pic03.jpg" alt="" />
 								</div>
 								<div class="content">
 									<header class="align-center">
@@ -145,22 +145,22 @@
 					<div class="gallery">
 						<div>
 							<div class="image fit">
-								<a href="#"><img src="resources/images/pic01.jpg" alt="" /></a>
+								<a href="#"><img src="/resources/images/pic01.jpg" alt="" /></a>
 							</div>
 						</div>
 						<div>
 							<div class="image fit">
-								<a href="#"><img src="resources/images/pic02.jpg" alt="" /></a>
+								<a href="#"><img src="/resources/images/pic02.jpg" alt="" /></a>
 							</div>
 						</div>
 						<div>
 							<div class="image fit">
-								<a href="#"><img src="resources/images/pic03.jpg" alt="" /></a>
+								<a href="#"><img src="/resources/images/pic03.jpg" alt="" /></a>
 							</div>
 						</div>
 						<div>
 							<div class="image fit">
-								<a href="#"><img src="resources/images/pic04.jpg" alt="" /></a>
+								<a href="#"><img src="/resources/images/pic04.jpg" alt="" /></a>
 							</div>
 						</div>
 					</div>
@@ -184,11 +184,11 @@
 			</footer>
 
 		<!-- Scripts -->
-			<script src="resources/assets/js/jquery.min.js"></script>
-			<script src="resources/assets/js/jquery.scrollex.min.js"></script>
-			<script src="resources/assets/js/skel.min.js"></script>
-			<script src="resources/assets/js/util.js"></script>
-			<script src="resources/assets/js/main.js"></script>
+			<script src="/resources/assets/js/jquery.min.js"></script>
+			<script src="/resources/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/resources/assets/js/skel.min.js"></script>
+			<script src="/resources/assets/js/util.js"></script>
+			<script src="/resources/assets/js/main.js"></script>
 
 	</body>
 </html>

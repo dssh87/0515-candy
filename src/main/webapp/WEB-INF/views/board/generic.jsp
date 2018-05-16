@@ -9,14 +9,14 @@
 		<title>Hielo by TEMPLATED</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="resources/assets/css/main.css" />
+		<link rel="stylesheet" href="/resources/assets/css/main.css" />
 	</head>
 	<body class="subpage">
 
 		<!-- Header -->
 			<header id="header">
 				<div class="logo"><a href="index">Hielo <span>by TEMPLATED</span></a></div>
-				<a href="#menu">Menu</a>
+				<a href="#menu">Menu</a>+
 			</header>
 
 		<!-- Nav -->
@@ -74,11 +74,11 @@
 			</footer>
 
 		<!-- Scripts -->
-			<script src="resources/assets/js/jquery.min.js"></script>
-			<script src="resources/assets/js/jquery.scrollex.min.js"></script>
-			<script src="resources/assets/js/skel.min.js"></script>
-			<script src="resources/assets/js/util.js"></script>
-			<script src="resources/assets/js/main.js"></script>
+			<script src="/resources/assets/js/jquery.min.js"></script>
+			<script src="/resources/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/resources/assets/js/skel.min.js"></script>
+			<script src="/resources/assets/js/util.js"></script>
+			<script src="/resources/assets/js/main.js"></script>
 
 	</body>
 </html>

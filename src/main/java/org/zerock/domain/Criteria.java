@@ -5,7 +5,20 @@ import lombok.Data;
 @Data
 public class Criteria {
 
+	
 	private int page;
+	private String type;
+	private String keyword;
+	
+	public String[] getArr() {
+		
+		if(type == null) {
+			return null;
+		}else {
+			return this.type.split("");
+		}
+	}
+	
 	
 	public Criteria() {
 	
