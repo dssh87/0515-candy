@@ -20,6 +20,7 @@ public class BoardVO {
 		return gap < ADAY;
 
 		// 실시간
+ 
 
 		
 		
@@ -36,6 +37,10 @@ public class BoardVO {
 		
  
 		//poohpoohpooh 원투쓰리 첵첵
+
+
+		
+		//방가방가햄토리
 
 
 	}
