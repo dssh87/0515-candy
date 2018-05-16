@@ -22,8 +22,7 @@ public class BoardVO {
 		// 실시간
 		// 등록일 수정
 
-		// 실시간 녹화방송
-		
+		// 실시간 녹화방송 test		
 		//poohpoohpooh 원투쓰리 첵첵
 
 	}
