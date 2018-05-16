@@ -20,18 +20,23 @@ public class BoardVO {
 		return gap < ADAY;
 
 		// 실시간
- jinju
+ 
 		
 		
 		
 		//hello World~~~~~~~!!^00^
-=======
+
 		// 등록일 수정
+ 
+
+		// 실시간 녹화방송 test		
+
 
 		// 실시간 녹화방송
 		
+ 
 		//poohpoohpooh 원투쓰리 첵첵
 
- master
+
 	}
 }
