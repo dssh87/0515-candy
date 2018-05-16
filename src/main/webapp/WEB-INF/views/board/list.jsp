@@ -1,22 +1,20 @@
+<!DOCTYPE HTML>
+<html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE HTML>
-<!--
-    Hielo by TEMPLATED
-    templated.co @templatedco
-    Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
--->
-<html>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <head>
 <title>Hielo by TEMPLATED</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/resources/assets/css/main.css" />
 <style>
+.search1{
+text-align:center;
+}
 .outer {
-	padding: 10%;
+	padding: 5%;
 	background-color: #ffffff;
 	background-color: rgba(255, 255, 255, 0.6);
 }
@@ -36,7 +34,7 @@
 .pagination a {
 	color: black;
 	float: left;
-	padding: 8px 16px;
+	padding: 8px 5px;
 	text-decoration: none;
 }
 
@@ -45,32 +43,71 @@
 	color: white;
 }
 
-.pagination
- 
-a
-:hover
-:not
- 
-(
-.active
- 
-)
-{
-background-color
-:
- 
-pink
-;
-
-
+.pagination a:hover:not (
+.active ){
+	background-color: pink;
 }
+
 .search {
 	width: 33%;
 	margin-left: 33%;
+	}
+.box {
+	display: block;
+	background-color: transparent;
+	overflow: hidden;
+	padding-right: 50px;
+	white-space: nowrap;
+	margin-bottom:0;
 }
+
+.title {
+	display: inline-block;
+	overflow: hidden;
+	max-width: 100%;
+	text-decoration: none;
+	text-overflow: ellipsis;
+	vertical-align: middle;
+}
+
+.ico {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.qbtn{
+width: 100%;
+
+left: 35%;
+
+
+}
+.sbtn{
+width: 25%;
+position: relative;
+ float: left; 
+
+}
+
+.rbtn{
+width: 25%;
+position:relative;
+
+float: left; 
+
+
+}
+.select-wrapper{
+width: 15%;
+position:absolute;
+float: left; 
+
+}
+
 </style>
 </head>
 <body class="subpage">
+	<!--  -->
 	<!-- Header -->
 	<header id="header">
 		<div class="logo">
@@ -81,9 +118,9 @@ pink
 	<!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
-			<li><a href="index">Home</a></li>
-			<li><a href="generic">Generic</a></li>
-			<li><a href="elements">Elements</a></li>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="generic.html">Generic</a></li>
+			<li><a href="elements.html">Elements</a></li>
 		</ul>
 	</nav>
 	<!-- One -->
@@ -101,65 +138,130 @@ pink
 			<!-- Table -->
 			<h3>Table</h3>
 			<div class="table-wrapper">
-				<table>
+				<table style="table-layout: fixed;">
+					<colgroup>
+						<col style="width: 20%;" />
+						<col style="width: 40%;" />
+						<col style="width: 20%;" />
+						<col style="width: 20%;" />
+
+					</colgroup>
+
 					<thead>
 						<th>Bno</th>
 						<th>Title</th>
 						<th>Writer</th>
-						<th>Regdate</th>
-						<th>Updatedate</th>
+						<th style="text-align: right;">Regdate</th>
 						</tr>
 					</thead>
 					<tbody>
-
-						<c:forEach var="vo" items="${list}">
-							<tr class="odd gradeX">
+						<c:forEach items="${list}" var="vo">
+							<tr>
 								<td><c:out value="${vo.bno}" /></td>
-								<td class="target" data-bno="${vo.bno }"><c:out
-										value="${vo.title}" /></td>
+
+
+								<td class="box">
+										<span class="title"> <c:out value="${vo.title}" />
+										</span> <span class="ico"> <c:if test="${vo.newIcon==1}">
+												<img src="/resources/images/new.gif">
+											</c:if>
+										</span>
+									</div>
+
+								</td>
 								<td><c:out value="${vo.writer}" /></td>
-								<td><c:out value="${vo.regdate}" /></td>
-								<td><c:out value="${vo.updatedate}" /></td>
+								<td style="text-align: right"><c:if test="${vo.newIcon==1}">
+										<fmt:formatDate value="${vo.regdate}" pattern="HH:mm:ss" />
+									</c:if> <c:if test="${vo.newIcon!=1}">
+										<fmt:formatDate value="${vo.regdate}" pattern="yyyy-MM-dd" />
+									</c:if></td>
 							</tr>
 						</c:forEach>
-
-					</tbody>
-
+					</tfoot>
 				</table>
 			</div>
 			<div class="center">
-				<ul class="pagination">
-
-
-
-					<c:if test="${pageMaker.prev}">
-						<li><a href="list?page=${pageMaker.start-10}"
-							aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
-						</a></li>
+				<div class="pagination">
+					<c:if test="${pm.prev}">
+						<a href="/board/list?page=${pm.start-1}"><<</a>
 					</c:if>
-					<c:forEach begin="${pageMaker.start}" end="${pageMaker.end}"
-						var="page">
-						<li class="${page==pageMaker.page?'active':''}"><a
-							href="list?page=${page}">${page}</a></li>
+					<c:forEach begin="${pm.start}" end="${pm.end}" var="idx">
+						<a href="/board/list?page=${idx}"
+							class="<c:if test="${pm.cri.page==idx}">active</c:if>">${idx}</a>
 					</c:forEach>
-					<c:if test="${pageMaker.next}">
-						<li><a href="list?page=${pageMaker.start+10}"
-							aria-label="Next"> <span aria-hidden="true">&raquo;</span>
-						</a></li>
+					<c:if test="${pm.next}">
+						<a href="/board/list?page=${pm.end+1}">>></a>
 					</c:if>
-				</ul>
+				</div>
 			</div>
-			<div class="search">
-				<form method="post" action="#">
-					<div style="float: left; width: 70%">
+			<div class="search1">
+			
+			<div class="row uniform"  >
+			
+			
+					<div class="3u 12u$(small)">
+						<div class="select-wrapper">
+							<select name="category" id="category">
+							<	<option value="">- Category -</option>
+								<option value="1">title</option>
+								<option value="1">content</option>
+								<option value="1">writer</option>
+								<option value="1">title+content</option>
+								<option value="1">title+content+writer</option>
+							</select>
+						</div>
+					</div>
+					<div class="3u 12u$(small)">
+					<div class="qbtn">
 						<input type="text" name="query" id="query" value=""
 							placeholder="Query" />
+							</div>
 					</div>
-					<div style="float: left; width: 30%">
-						<input type="submit" value="Search" />
+					<div>
+					<form  method="post" action="#" >
+					
+					<div class="3u$ 12u$(small)">
+						<input type="submit" value="Search"  />
+					
 					</div>
-				</form>
+					</form>
+					</div>
+					<div class="rbtn">
+		<form  method="post" action="#" >
+					
+				<a href="register" class="button">Register</a>
+			
+			</form>
 			</div>
+				</div>
+			</div>
+			</div>
+			
+			<!-- <!-- Break -->
+			<!-- <div class="search">
+                <div class="6u 12u$(xsmall)">
+                    <div class="select-wrapper">
+                        <select name="category" id="category">
+                            <option value="">- Category -</option>
+                            <option value="1">Manufacturing</option>
+                            <option value="1">Shipping</option>
+                            <option value="1">Administration</option>
+                            <option value="1">Human Resources</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="6u 12u$(xsmall)">
+                    <form method="post" action="#">
+                        <div style="float: left; width: 70%">
+                            <input type="text" name="query" id="query" value=""
+                                placeholder="Query" />
+                        </div>
+                        <div style="float: left; width: 30%">
+                            <input type="submit" value="Search" />
+                        </div>
+                    </form>
+                </div>
+            </div> -->
 		</div>
 		<!-- Footer -->
 		<footer id="footer">

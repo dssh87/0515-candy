@@ -9,4 +9,5 @@ public interface BoardMapper {
 
 	public List<BoardVO> list(Criteria cri);
 	public int getCount(Criteria cri);
+	public int getNewIcon(BoardVO vo);
 }
