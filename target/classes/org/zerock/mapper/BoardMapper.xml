@@ -7,12 +7,11 @@
 <mapper namespace="org.zerock.mapper.BoardMapper">
 
 <select id="list" resultType="org.zerock.domain.BoardVO">
-		<![CDATA[
-		select bno,title,writer,regdate,updatedate
-		,(SELECT IF(DATE_SUB(NOW(), INTERVAL 1 DAY) <= regdate, 1, 0)) newIcon
+	
+		select bno,title,writer,regdate,updatedate 
 		 from tbl_aboard order by bno desc
 		limit #{skip},10 
-		]]>
+	
 </select>
 
 

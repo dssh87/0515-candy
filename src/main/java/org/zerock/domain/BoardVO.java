@@ -18,9 +18,32 @@ public class BoardVO {
 		long gap = new Date().getTime() - regdate.getTime();
 		
 		return gap < ADAY;
+
+		// 실시간
+ 
+
+		
+		
+		
+		//hello World~~~~~~~!!^00^
+
+		// 등록일 수정
+ 
+
+		// 실시간 녹화방송 test		
+
+
 		// 실시간 녹화방송
 		
-		//pull
+
+		//pull~~~~
+ 
 		//poohpoohpooh 원투쓰리 첵첵
+
+
+		
+		//방가방가햄토리
+
+
 	}
 }
