@@ -18,8 +18,13 @@ public class BoardVO {
 		long gap = new Date().getTime() - regdate.getTime();
 		
 		return gap < ADAY;
+
+		// 실시간
+		// 등록일 수정
+
 		// 실시간 녹화방송
 		
 		//poohpoohpooh 원투쓰리 첵첵
+
 	}
 }
