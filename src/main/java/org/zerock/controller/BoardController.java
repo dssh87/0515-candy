@@ -13,6 +13,8 @@ import org.zerock.service.BoardService;
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
 
+
+
 @Controller
 @RequestMapping("/board/*")
 @Log4j
