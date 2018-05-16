@@ -19,5 +19,9 @@ public class BoardVO {
 		
 		return gap < ADAY;
 		// 실시간
+		
+		
+		
+		//hello World~~~~~~~!!^00^
 	}
 }
