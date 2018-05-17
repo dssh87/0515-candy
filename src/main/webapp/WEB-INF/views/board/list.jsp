@@ -197,6 +197,7 @@ width: 100%;
 
 					</colgroup>
 
+
 					<thead>
 						<th>Bno</th>
 						<th>Title</th>
