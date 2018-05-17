@@ -1,8 +1,10 @@
 package org.zerock.domain;
 
 import lombok.Data;
+import lombok.ToString;
 
 @Data
+@ToString
 public class Criteria {
 
 	
@@ -33,8 +35,7 @@ public class Criteria {
 		
 		return (this.page - 1)*10;
 	}
-	
-	
+
 	
 	
 }

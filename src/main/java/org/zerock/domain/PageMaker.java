@@ -42,4 +42,28 @@ public class PageMaker {
 		}
 		this.end = tempLast;
 	}
+	
+	public String makeURL(int page) {
+		
+		StringBuilder builder = new StringBuilder();
+		
+		builder.append("page=");
+		builder.append(page);
+		
+		if(cri.getType() !=null) {
+			builder.append("&");
+			builder.append("type=");
+			builder.append(cri.getType());
+		}
+		
+		if(cri.getKeyword() !=null) {
+			builder.append("&");
+			builder.append("keyword=");
+			builder.append(cri.getKeyword());
+		}
+		
+		return builder.toString();
+		
+	}
+	
 }

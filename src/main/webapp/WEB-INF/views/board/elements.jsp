@@ -9,7 +9,7 @@
 		<title>Hielo by TEMPLATED</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link rel="stylesheet" href="resources/assets/css/main.css" />
+		<link rel="stylesheet" href="/resources/assets/css/main.css" />
 	</head>
 	<body class="subpage">
 
@@ -450,11 +450,11 @@ print 'It took ' + i + ' iterations to sort the deck.';
 			</footer>
 
 		<!-- Scripts -->
-			<script src="resources/assets/js/jquery.min.js"></script>
-			<script src="resources/assets/js/jquery.scrollex.min.js"></script>
-			<script src="resources/assets/js/skel.min.js"></script>
-			<script src="resources/assets/js/util.js"></script>
-			<script src="resources/assets/js/main.js"></script>
+			<script src="/resources/assets/js/jquery.min.js"></script>
+			<script src="/resources/assets/js/jquery.scrollex.min.js"></script>
+			<script src="/resources/assets/js/skel.min.js"></script>
+			<script src="/resources/assets/js/util.js"></script>
+			<script src="/resources/assets/js/main.js"></script>
 
 	</body>
 </html>

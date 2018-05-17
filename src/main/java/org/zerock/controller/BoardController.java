@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
@@ -34,23 +35,28 @@ public class BoardController {
 		model.addAttribute("pm", new PageMaker(cri, totalCount));
 
 	}
+
 	
-	@GetMapping("/register")
+	@GetMapping("register")
 	public void register() {
 		
 	}
 	
 	
-	@GetMapping("/view")
+	@GetMapping("view")
 	public void view() {
 		
 	}
-	@GetMapping("/index")
+	@GetMapping("index")
 	public void index() {
 		
 	}
-	@GetMapping("/generic")
+	@GetMapping("generic")
 	public void generic() {
+		
+	}
+	@GetMapping("elements")
+	public void elements() {
 		
 	}
 }

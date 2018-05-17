@@ -45,22 +45,68 @@
 }
 
 .pagination
+
+
+
  
+
+
+
 a
+
+
+
+
+
+
 :hover
+
+
+
+
+
+
 :not
+
+
+
  
+
+
+
 (
 .active
+
+
+
  
+
+
+
 ){
 background-color
+
+
+
+
+
+
 :
+
+
+
  
+
+
+
 pink
+
+
+
+
+
+
 ;
-
-
 }
 .search {
 	width: 33%;
@@ -90,24 +136,20 @@ pink
 	vertical-align: middle;
 }
 
-.qbtn {
+.select-wrapper {
 	width: 100%;
-	left: 35%;
-
 }
-
-.sbtn {
-	width: 100%;
-	position: relative;
+.btn{
+width: 100%;
 }
-
-.row uniform {
-	width: 50%;
-
+.kbtn{
+width: 100%;
 }
-
+.sbtn{
+width: 100%;
+}
 .rbtn {
-	width: 25%;
+	width: 100%;
 }
 </style>
 </head>
@@ -116,16 +158,17 @@ pink
 	<!-- Header -->
 	<header id="header">
 		<div class="logo">
-			<a href="index.html">Hielo <span>by TEMPLATED</span></a>
+			<a href="index">Hielo <span>by TEMPLATED</span></a>
 		</div>
 		<a href="#menu">Menu</a>
 	</header>
 	<!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
-			<li><a href="index.html">Home</a></li>
-			<li><a href="generic.html">Generic</a></li>
-			<li><a href="elements.html">Elements</a></li>
+			<li><a href="index">Home</a></li>
+			<li><a href="generic">Generic</a></li>
+			<li><a href="elements">Elements</a></li>
+			<li><a href="list">list</a></li>
 		</ul>
 	</nav>
 	<!-- One -->
@@ -186,55 +229,60 @@ pink
 			<div class="center">
 				<div class="pagination">
 					<c:if test="${pm.prev}">
-						<a href="/board/list?page=${pm.start-1}"><<</a>
+						<a href="/board/list?${pm.makeURL(pm.start-1)}"><<</a>
 					</c:if>
 					<c:forEach begin="${pm.start}" end="${pm.end}" var="idx">
-						<a href="/board/list?page=${idx}"
+						<a href="/board/list?${pm.makeURL(idx)}"
 							class="<c:if test="${pm.cri.page==idx}">active</c:if>">${idx}</a>
 					</c:forEach>
 					<c:if test="${pm.next}">
-						<a href="/board/list?page=${pm.end+1}">>></a>
+						<a href="/board/list?${pm.makeURL(pm.end+1)}">>></a>
 					</c:if>
 				</div>
 			</div>
 			<div class="search1">
 
 				<div class="row uniform">
+					<form class="btn" method="get" action="/board/list">
 
-
-					<div class="3u 12u$(small)">
-						<div class="select-wrapper">
-							<select name="category" id="category"> <
-								<option value="">- Category -</option>
-								<option value="1">title</option>
-								<option value="1">content</option>
-								<option value="1">writer</option>
-								<option value="1">title+content</option>
-								<option value="1">title+content+writer</option>
-							</select>
+						<div class="3u 12u$(small)">
+							<div class="select-wrapper">
+								<select name="type" id="type"> <
+									<option value="">- Category -</option>
+									<option value="t"
+										<c:out value="${cri.type eq 't'?'selected':''}"/>>title</option>
+									<option value="c"
+										<c:out value="${cri.type eq 'c'?'selected':''}"/>>content</option>
+									<option value="w"
+										<c:out value="${cri.type eq 'w'?'selected':''}"/>>writer</option>
+									<option value="tc"
+										<c:out value="${cri.type eq 'tc'?'selected':''}"/>>title+content</option>
+									<option value="tcw"
+										<c:out value="${cri.type eq 'tcw'?'selected':''}"/>>title+content+writer</option>
+								</select>
+							</div>
 						</div>
-					</div>
-					<div class="4u 12u$(small)">
-						<div class="qbtn">
-							<input type="text" name="query" id="query" value=""
-								placeholder="Query" />
-						</div>
-					</div>
-					<div>
-						<form method="post" action="#">
+						<div class="kbtn">
+							<div class="4u 12u$(small)">
 
-							<div class="6u$ 12u$(small)">
-								<input type="submit" value="Search" />
-								
+								<input type="text" name="keyword" id="query"
+									placeholder="input your message"
+									value=<c:out value="${cri.keyword }"/>>
 
 							</div>
-						</form>
-					</div>
+						</div>
+						<div class="sbtn">
+							<div class="6u$ 12u$(small)">
+								<input type="submit" value="Search" />
+							</div>
+						</div>
+					</form>
+
 					<div class="rbtn">
-						
+
 						<a href="register" class="button fit">Register</a>
 
-				
+
 					</div>
 				</div>
 			</div>
