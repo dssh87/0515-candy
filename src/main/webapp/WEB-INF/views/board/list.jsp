@@ -150,6 +150,8 @@ width: 100%;
 }
 .rbtn {
 	width: 100%;
+	
+	
 }
 </style>
 </head>
