@@ -47,14 +47,10 @@
 .pagination
 
 
-
  
 
 
-
 a
-
-
 
 
 
@@ -64,23 +60,17 @@ a
 
 
 
-
-
 :not
 
 
-
  
-
 
 
 (
 .active
 
 
-
  
-
 
 
 ){
@@ -89,19 +79,13 @@ background-color
 
 
 
-
-
 :
-
 
 
  
 
 
-
 pink
-
-
 
 
 
@@ -139,19 +123,24 @@ pink
 .select-wrapper {
 	width: 100%;
 }
-.btn{
-width: 100%;
+
+.btn {
+	width: 100%;
+	float: left;
 }
-.kbtn{
-width: 100%;
+
+.kbtn {
+	width: 100%;
+	float: left;
 }
-.sbtn{
-width: 100%;
+
+.sbtn {
+	width: 100%;
+	float: left;
 }
+
 .rbtn {
 	width: 100%;
-	
-	
 }
 </style>
 </head>
@@ -250,36 +239,43 @@ width: 100%;
 
 						<div class="3u 12u$(small)">
 							<div class="select-wrapper">
-								<select name="type" id="type"> <
-									<option value="">- Category -</option>
-									<option value="t"
-										<c:out value="${cri.type eq 't'?'selected':''}"/>>title</option>
-									<option value="c"
-										<c:out value="${cri.type eq 'c'?'selected':''}"/>>content</option>
-									<option value="w"
-										<c:out value="${cri.type eq 'w'?'selected':''}"/>>writer</option>
-									<option value="tc"
-										<c:out value="${cri.type eq 'tc'?'selected':''}"/>>title+content</option>
-									<option value="tcw"
-										<c:out value="${cri.type eq 'tcw'?'selected':''}"/>>title+content+writer</option>
-								</select>
-							</div>
-						</div>
-						<div class="kbtn">
-							<div class="4u 12u$(small)">
+								<table>
+									<tbody>
+										<tr>
+											<td><select name="type" id="type">
+													<option value="">- Category -</option>
+													<option value="t"
+														<c:out value="${cri.type eq 't'?'selected':''}"/>>title</option>
+													<option value="c"
+														<c:out value="${cri.type eq 'c'?'selected':''}"/>>content</option>
+													<option value="w"
+														<c:out value="${cri.type eq 'w'?'selected':''}"/>>writer</option>
+													<option value="tc"
+														<c:out value="${cri.type eq 'tc'?'selected':''}"/>>title+content</option>
+													<option value="tcw"
+														<c:out value="${cri.type eq 'tcw'?'selected':''}"/>>title+content+writer</option>
+											</select></td>
 
-								<input type="text" name="keyword" id="query"
-									placeholder="input your message"
-									value=<c:out value="${cri.keyword }"/>>
 
-							</div>
-						</div>
-						<div class="sbtn">
-							<div class="6u$ 12u$(small)">
-								<input type="submit" value="Search" />
+											<div class="kbtn">
+												<div class="4u 12u$(small)">
+													<td><input type="text" name="keyword" id="query"
+														placeholder="input your message"
+														value=<c:out value="${cri.keyword }"/>></td>
+												</div>
+											</div>
+											<div class="sbtn">
+												<div class="6u$ 12u$(small)">
+													<td><input type="submit" value="Search" /></td>
+												</div>
+											</div>
+										</tr>
+									</tbody>
+								</table>
 							</div>
 						</div>
 					</form>
+
 
 					<div class="rbtn">
 

@@ -1,10 +1,12 @@
 package org.zerock.domain;
 
+import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 
 @Getter
 @ToString
+@Data
 public class PageMaker {
 
 	private boolean prev, next;
