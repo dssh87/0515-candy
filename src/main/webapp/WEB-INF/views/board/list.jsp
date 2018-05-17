@@ -2,13 +2,14 @@
 <html>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <head>
 <title>Hielo by TEMPLATED</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="/resources/assets/css/main.css" />
+<link rel="stylesheet" href="/resources/css/main.css?ver=2" />
 <style>
 .search1 {
 	text-align: center;
@@ -44,70 +45,10 @@
 	color: white;
 }
 
-.pagination
-
-
-
- 
-
-
-
-a
-
-
-
-
-
-
-:hover
-
-
-
-
-
-
-:not
-
-
-
- 
-
-
-
-(
-.active
-
-
-
- 
-
-
-
-){
-background-color
-
-
-
-
-
-
-:
-
-
-
- 
-
-
-
-pink
-
-
-
-
-
-
-;
+.pagination a :hover :not(.active){
+background-color:pink;
 }
+
 .search {
 	width: 33%;
 	margin-left: 33%;
@@ -135,24 +76,14 @@ pink
 	display: inline-block;
 	vertical-align: middle;
 }
+#selectbox{
+    display: block;
+    width:100%;
 
-.select-wrapper {
-	width: 100%;
 }
-.btn{
-width: 100%;
-}
-.kbtn{
-width: 100%;
-}
-.sbtn{
-width: 100%;
-}
-.rbtn {
-	width: 100%;
-	
-	
-}
+
+
+
 </style>
 </head>
 <body class="subpage">
@@ -177,8 +108,8 @@ width: 100%;
 	<section id="One" class="wrapper style3">
 		<div class="inner">
 			<header class="align-center">
-				<p>Sed amet nulla</p>
-				<h2>Elements</h2>
+				<p>delicious almond</p>
+				<h2>Board List</h2>
 			</header>
 		</div>
 	</section>
@@ -186,7 +117,7 @@ width: 100%;
 	<div id="main" class="container">
 		<div class="outer">
 			<!-- Table -->
-			<h3>Table</h3>
+			<h3>Almond List</h3>
 			<div class="table-wrapper">
 				<table style="table-layout: fixed;">
 					<colgroup>
@@ -196,7 +127,6 @@ width: 100%;
 						<col style="width: 20%;" />
 
 					</colgroup>
-
 
 					<thead>
 						<th>Bno</th>
@@ -243,11 +173,9 @@ width: 100%;
 					</c:if>
 				</div>
 			</div>
-			<div class="search1">
+			<div class="btn">
 
-				<div class="row uniform">
-					<form class="btn" method="get" action="/board/list">
-
+				<div class="row uniform" id="selectbox">
 						<div class="3u 12u$(small)">
 							<div class="select-wrapper">
 								<select name="type" id="type"> <
@@ -266,7 +194,7 @@ width: 100%;
 							</div>
 						</div>
 						<div class="kbtn">
-							<div class="4u 12u$(small)">
+							<div class="12u 12u$(small)">
 
 								<input type="text" name="keyword" id="query"
 									placeholder="input your message"
@@ -275,23 +203,42 @@ width: 100%;
 							</div>
 						</div>
 						<div class="sbtn">
-							<div class="6u$ 12u$(small)">
-								<input type="submit" value="Search" />
-							</div>
+							<div class="12u 12u$(small)">
+								<button id="search"  value="Search"  class="button.fit">Search</button>
 						</div>
-					</form>
-
+						</div>
+				
 					<div class="rbtn">
-
-						<a href="register" class="button fit">Register</a>
-
+							<div class="12u 12u$(small)">
+						<button id="register">Register</a></button>
+							</div>
 
 					</div>
+
 				</div>
 			</div>
 		</div>
+		</div>
+	
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+  
+  <script>
+  $(document).ready(function () {
+	$("#search").on("click",function(e){
+		console.log("click.............")
+	
+	self.location="/board/list?"+'${pm.makeQuery(1)}'+"&type="+$("select option:selected").val()+
+	"&keyword="+encodeURIComponent($('#query').val());
+	});
+});
+  
+  
+  </script>
 
-	</div>
+	
 	<!-- Footer -->
 	<footer id="footer">
 		<div class="container">
@@ -308,10 +255,10 @@ width: 100%;
 		<div class="copyright">&copy; Untitled. All rights reserved.</div>
 	</footer>
 	<!-- Scripts -->
-	<script src="/resources/assets/js/jquery.min.js"></script>
-	<script src="/resources/assets/js/jquery.scrollex.min.js"></script>
-	<script src="/resources/assets/js/skel.min.js"></script>
-	<script src="/resources/assets/js/util.js"></script>
-	<script src="/resources/assets/js/main.js"></script>
+	<script src="/resources/js/jquery.min.js"></script>
+	<script src="/resources/js/jquery.scrollex.min.js"></script>
+	<script src="/resources/js/skel.min.js"></script>
+	<script src="/resources/js/util.js"></script>
+	<script src="/resources/js/main.js"></script>
 </body>
 </html>

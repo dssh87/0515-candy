@@ -11,7 +11,7 @@ import org.zerock.mapper.BoardMapper;
 import lombok.Setter;
 
 @Service
-public class BoardServiceImp implements BoardService {
+public class BoardServiceImp implements BoardService{
 
 	@Setter(onMethod_= {@Autowired})
 	private BoardMapper mapper;

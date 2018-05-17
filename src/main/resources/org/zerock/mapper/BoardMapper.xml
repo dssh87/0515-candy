@@ -10,8 +10,7 @@
 
 		<where>
 			<if test="arr !=null">
-				<foreach separator="OR" open="(" close=")" item="type"
-					collection="arr">
+				<foreach separator="OR" open="("  close=")" item="type" collection="arr">
 					<if test="type eq 't'.toString()">title like concat('%',#{keyword},'%')</if>
 					<if test="type eq 'c'.toString()">content like concat('%',#{keyword},'%')</if>
 					<if test="type eq 'w'.toString()">writer like concat('%',#{keyword},'%')</if>
@@ -30,7 +29,7 @@
 
 
 	<select id="getCount" resultType="int">
-		select count(*) from tbl_aboard
+		select count(*) from tbl_aboard <include refid="search"/>
 	</select>
 
 </mapper>

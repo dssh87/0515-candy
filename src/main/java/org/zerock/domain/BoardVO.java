@@ -21,8 +21,5 @@ public class BoardVO {
 		
 		return gap < ADAY;
 
-
-		
-
 	}
 }
