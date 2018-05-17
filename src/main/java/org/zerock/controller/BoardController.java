@@ -25,8 +25,8 @@ public class BoardController {
 	@Setter(onMethod_ = { @Autowired })
 	private BoardService service;
 
-	@GetMapping("/list")
-	public void list(@ModelAttribute("cri") Criteria cri, Model model) {
+	@GetMapping("list")
+	public void list(@ModelAttribute("cri") Criteria cri, Model model) throws Exception{
 
 		model.addAttribute("list",service.list(cri));
 

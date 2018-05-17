@@ -1,12 +1,26 @@
 package org.zerock.domain;
 
+
 import lombok.Data;
 import lombok.Getter;
 import lombok.ToString;
 
-@Getter
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+
+
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import lombok.Data;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j;
+
 @ToString
 @Data
+
+@Log4j
+
 public class PageMaker {
 
 	private boolean prev, next;
@@ -61,10 +75,25 @@ public class PageMaker {
 		if(cri.getKeyword() !=null) {
 			builder.append("&");
 			builder.append("keyword=");
-			builder.append(cri.getKeyword());
+			builder.append(encoding(cri.getKeyword()));
 		}
-		
+
 		return builder.toString();
+	}
+	private String encoding(String keyword) {
+		
+		if(keyword ==null || keyword.trim().length()==0) {
+			return "";
+		}try {
+			return URLEncoder.encode(keyword,"UTF-8");
+		}catch (UnsupportedEncodingException e) {
+			return "";
+		}
+	}
+	public String makeQuery(int page) {
+		UriComponents uriComponents=
+		UriComponentsBuilder.newInstance().queryParam("page",page).build();
+		return uriComponents.toUriString();
 		
 	}
 	

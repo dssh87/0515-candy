@@ -20,5 +20,6 @@ public class BoardVO {
 		long gap = new Date().getTime() - regdate.getTime();
 		
 		return gap < ADAY;
+
 	}
 }

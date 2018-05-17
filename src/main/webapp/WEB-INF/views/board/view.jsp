@@ -9,7 +9,7 @@
     <title>Hielo by TEMPLATED</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <link rel="stylesheet" href="/resources/assets/css/main.css"/>
+    <link rel="stylesheet" href="/resources/css/main.css"/>
     <style>
         .contentbox {
             min-height: 500px;
@@ -117,10 +117,10 @@
     </div>
 </footer>
 <!-- Scripts -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/jquery.scrollex.min.js"></script>
-<script src="assets/js/skel.min.js"></script>
-<script src="assets/js/util.js"></script>
-<script src="assets/js/main.js"></script>
+    <script src="/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/jquery.scrollex.min.js"></script>
+    <script src="/resources/js/skel.min.js"></script>
+    <script src="/resources/js/util.js"></script>
+    <script src="/resources/js/main.js"></script>
 </body>
 </html>
