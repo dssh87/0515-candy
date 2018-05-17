@@ -3,8 +3,10 @@ package org.zerock.domain;
 import java.util.Date;
 
 import lombok.Data;
+import lombok.Getter;
 
 @Data
+@Getter
 public class BoardVO {
 
 	private Integer bno;
@@ -20,32 +22,7 @@ public class BoardVO {
 		return gap < ADAY;
 
 
-		// 실시간
- 
-
 		
-		
-		
-		//hello World~~~~~~~!!^00^
-
-		// 등록일 수정
- 
-
-		// 실시간 녹화방송 test		
-
-
-		// 실시간 녹화방송
-		
-
-		//pull~~~~
- 
-		//poohpoohpooh 원투쓰리 첵첵
-
-
-		
-		//방가방가햄토리
-
-
 
 	}
 }
