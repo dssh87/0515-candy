@@ -10,7 +10,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/resources/css/main.css?ver=2" />
+<!-- ㅇㄹㅇㄹㅇ -->
 <style>
+
+
 .search1 {
 	text-align: center;
 }
@@ -137,12 +140,12 @@ background-color:pink;
 					</thead>
 					<tbody>
 						<c:forEach items="${list}" var="vo">
-							<tr>
+							<tr >
 								<td><c:out value="${vo.bno}" /></td>
 
 
-								<td class="box"><span class="title"> <c:out
-											value="${vo.title}" />
+								<td class="box" data-bno='${vo.bno}'><span class="title"> <c:out
+											value="${vo.title}"  />
 								</span> <span class="ico"> <c:if test="${vo.checkNew()}">
 											<img src="/resources/images/new.gif">
 										</c:if>
@@ -230,12 +233,16 @@ background-color:pink;
 	$("#search").on("click",function(e){
 		console.log("click.............")
 	
-	self.location="/board/list?"+'${pm.makeQuery(1)}'+"&type="+$("select option:selected").val()+
+	self.location="/board/list"+'${pm.makeQuery(1)}'+"&type="+$("select option:selected").val()+
 	"&keyword="+encodeURIComponent($('#query').val());
 	});
 });
   
-  
+  $("table td").on("click",function(e){
+	  console.log("클릭~~~~~~~~~~~~~~")
+	 var bno =$(this).attr("data-bno");
+	 location.href="/board/view?bno=" +bno+"&${pm.makeURL(bno)}";
+  });
   </script>
 
 	

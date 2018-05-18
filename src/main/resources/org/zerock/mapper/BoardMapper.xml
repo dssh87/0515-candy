@@ -31,5 +31,11 @@
 	<select id="getCount" resultType="int">
 		select count(*) from tbl_aboard <include refid="search"/>
 	</select>
+	
+	<select id="view" resultType="org.zerock.domain.BoardVO">
+	
+	select * from tbl_aboard where bno = #{bno}
+	
+	</select>
 
 </mapper>

@@ -29,4 +29,10 @@ public class BoardMapperTests {
 		
 	}
 	
+	@Test
+	public void testView() {
+		
+		mapper.view(3);
+	}
+	
 }

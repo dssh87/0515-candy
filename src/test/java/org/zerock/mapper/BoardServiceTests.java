@@ -26,4 +26,9 @@ public class BoardServiceTests {
 		service.list(new Criteria(3));
 		
 	}
+	
+	@Test
+	public void testView() {
+		log.info("나오나~~~~~~~~~~~~~~"+service.view(3));
+	}
 }
