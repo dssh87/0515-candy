@@ -31,4 +31,10 @@ public class BoardServiceTests {
 	public void testView() {
 		log.info("나오나~~~~~~~~~~~~~~"+service.view(3));
 	}
+	
+	@Test
+	public void testRemove() {
+		
+		service.remove(1507337);
+	}
 }

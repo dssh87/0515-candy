@@ -10,7 +10,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/resources/css/main.css?ver=2" />
-<!-- ㅇㄹㅇㄹㅇ -->
+
 <style>
 
 
@@ -144,7 +144,7 @@ background-color:pink;
 								<td><c:out value="${vo.bno}" /></td>
 
 
-								<td class="box" data-bno='${vo.bno}'><span class="title"> <c:out
+								<td class="box" data-bno='${vo.bno}' ><span class="title"> <c:out
 											value="${vo.title}"  />
 								</span> <span class="ico"> <c:if test="${vo.checkNew()}">
 											<img src="/resources/images/new.gif">
@@ -231,18 +231,38 @@ background-color:pink;
   <script>
   $(document).ready(function () {
 	$("#search").on("click",function(e){
-		console.log("click.............")
+		console.log("click.............");
 	
 	self.location="/board/list"+'${pm.makeQuery(1)}'+"&type="+$("select option:selected").val()+
 	"&keyword="+encodeURIComponent($('#query').val());
 	});
 });
   
-  $("table td").on("click",function(e){
-	  console.log("클릭~~~~~~~~~~~~~~")
+  $(".box").on("click",function(e){
+	  console.log("클릭~~~~~~~~~~~~~~");
 	 var bno =$(this).attr("data-bno");
-	 location.href="/board/view?bno=" +bno+"&${pm.makeURL(bno)}";
+	 var page = "${cri.page}" ;
+	 self.location="/board/view?bno=" +bno+"&${pm.makeURL(cri.page)}";
   });
+  
+  $("#register").on("click", function(e){
+	  console.log("click...");
+	 self.location="/board/register" ;
+  });
+  
+  $(document).ready(function () {
+	   var msg = '<c:out value="${msg}"/>';
+		
+		if(msg=="success" && !history.state){
+			alert("등록이 완료되었습니다."); 
+		}
+		if(msg=="fail" && !history.state){
+			alert("등록이 실패하였습니다."); 
+		}
+
+		history.replaceState({}, null, null);				
+	});
+  
   </script>
 
 	

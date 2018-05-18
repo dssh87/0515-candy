@@ -37,5 +37,15 @@
 	select * from tbl_aboard where bno = #{bno}
 	
 	</select>
+	
+	<insert id="insert">
+        insert into tbl_aboard (title,content,writer)
+        values (#{title}, #{content}, #{writer})
+    </insert>
+	
+	<delete id="remove" >
+	
+	delete from tbl_aboard where bno = #{bno}
+	</delete>
 
 </mapper>

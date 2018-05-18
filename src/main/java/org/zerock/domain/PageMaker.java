@@ -51,7 +51,7 @@ public class PageMaker {
 		this.end = tempLast;
 	}
 	
-	public String makeURL(int page) {
+	public String makeURL(int page) {		
 		
 		StringBuilder builder = new StringBuilder();
 		

@@ -10,4 +10,6 @@ public interface BoardMapper {
 	public List<BoardVO> list(Criteria cri);
 	public int getCount(Criteria cri);
 	public BoardVO view(int bno);
+	public int remove(int bno);
+	public int insert(BoardVO vo);
 }
