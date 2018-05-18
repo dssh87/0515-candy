@@ -34,5 +34,20 @@ public class BoardMapperTests {
 		
 		mapper.view(3);
 	}
+	@Test
+	public void testInsert() {
+		BoardVO vo = new BoardVO();
+		vo.setTitle("진주");
+		vo.setContent("원기");
+		vo.setWriter("바보");
+		
+		mapper.insert(vo);
+	}
+	
+	@Test
+	public void testRemove() {
+		
+		mapper.remove(1507334);
+	}
 	
 }
