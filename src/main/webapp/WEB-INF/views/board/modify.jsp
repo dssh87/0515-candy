@@ -71,7 +71,7 @@ display: inline;
 		<div class="outer">
 			<div class="mytable">
 				<div class="table-wrapper">
-					<h3>View</h3>
+					<h3>Modify</h3>
 					<table class="alt">
 						<thead>
 							<tr>
@@ -80,15 +80,13 @@ display: inline;
 						</thead>
 						<tbody>
 							<tr>
-								<td colspan="2"><strong>${view.title }</strong></td>
+								<strong><input type="text" value="${view.title }"></strong>
 							</tr>
 							<tr>
 								<td style="border-right: hidden; border-left: hidden;">${view.writer }</td>
-					<td width=50% style="text-align: right; border-right: hidden;">
-			
-					regdate <fmt:formatDate  value="${view.regdate}"	pattern="yyyy-MM-dd hh:mm"/><br>
-					update <fmt:formatDate value="${view.updatedate}"	pattern="yyyy-MM-dd hh:mm" />
-					
+								<td width=50% style="text-align: right; border-right: hidden;">
+									<fmt:formatDate value="${view.regdate}"
+										pattern="yyyy-MM-dd hh:mm" />
 								</td>
 							</tr>
 							<tr>
@@ -103,8 +101,7 @@ display: inline;
 								
 									<ul class="actions" style="float: left;">
 									<div style = "float: left">
-									<form action="/board/modify">
-									<input type="hidden" name="bno" value="${view.bno}">
+									<form>
 									<li><button type="submit" class="modify">Modify</button></li>
 									</form>
 									</div>
@@ -160,12 +157,6 @@ display: inline;
 		
 	});
 	
-/* 	$(".modify").on("click",function(e){
-		
-		self.location ='${cri.getLink("/board/modify")}';
-		
-	});
-	 */
 	
 	
 

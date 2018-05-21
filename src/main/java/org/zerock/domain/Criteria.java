@@ -30,7 +30,9 @@ public class Criteria {
 	}
 	
 	public Criteria(int page) {
+	
 		this.page =  page;
+	
 	}
 	
 	public int getSkip() {

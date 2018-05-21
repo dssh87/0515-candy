@@ -12,4 +12,5 @@ public interface BoardService {
 	public BoardVO view(int bno);
 	public int remove(int bno);
 	public int insert(BoardVO vo);
+	public int modify(BoardVO vo);
 }
