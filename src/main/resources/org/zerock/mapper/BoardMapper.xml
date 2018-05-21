@@ -38,7 +38,7 @@
 	
 	</select>
 	
-	<insert id="insert">
+	<insert id="insert" parameterType="org.zerock.domain.BoardVO">
         insert into tbl_aboard (title,content,writer)
         values (#{title}, #{content}, #{writer})
     </insert>
@@ -48,4 +48,10 @@
 	delete from tbl_aboard where bno = #{bno}
 	</delete>
 
+	<update id="modify" parameterType="org.zerock.domain.BoardVO">
+	
+	update tbl_aboard set title=#{title}, content = #{content} , writer = #{writer}, updatedate = now()
+	 where bno = #{bno}
+	
+	</update>
 </mapper>

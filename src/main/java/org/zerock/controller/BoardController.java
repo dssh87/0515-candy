@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
@@ -34,7 +35,8 @@ public class BoardController {
 
 	}
 	@GetMapping("register")
-	public void registerGet() {
+	public void registerGet(@ModelAttribute("cri")Criteria cri) {
+		
 		
 	}
 	
@@ -59,7 +61,37 @@ public class BoardController {
 	@GetMapping("view")
 	public void view(@ModelAttribute("cri")Criteria cri, Integer bno, Model model) {
 		model.addAttribute("view",service.view(bno));		
+		model.addAttribute("pm", new PageMaker(cri));
 	}
+
+	@PostMapping("remove")
+	public String remove(@RequestParam("bno")int bno, @ModelAttribute("cri") Criteria cri,
+			String makeUri, RedirectAttributes rttr) {
+		
+		log.info("아무말...."+makeUri);
+		service.remove(bno);
+		
+		rttr.addAttribute("page",cri.getPage());
+		rttr.addFlashAttribute("msg","remove");	
+	
+		return "redirect:/board/list?" + makeUri;
+		
+	}
+	
+	@GetMapping("modify")
+	public void getmodify(@ModelAttribute("cri")Criteria cri, Integer bno, Model model) {
+		model.addAttribute("view",service.view(bno));		
+		
+	}
+	
+	
+	@PostMapping("modify")
+	public void postmodify(@ModelAttribute("vo")BoardVO vo, RedirectAttributes rttr) {
+		
+		service.modify(vo);
+	}
+	
+	
 	@GetMapping("index")
 	public void index() {
 		
@@ -70,17 +102,6 @@ public class BoardController {
 	}
 	@GetMapping("elements")
 	public void elements() {
-		
-	}
-	@PostMapping("remove")
-	public String remove(@ModelAttribute("bno")int bno, RedirectAttributes rttr) {
-		
-		service.remove(bno);
-		
-		rttr.addFlashAttribute("msg","success");
-		
-		return "redirect:/board/list";
-		
 		
 	}
 }

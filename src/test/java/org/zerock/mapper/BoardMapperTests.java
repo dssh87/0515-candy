@@ -50,4 +50,15 @@ public class BoardMapperTests {
 		mapper.remove(1507334);
 	}
 	
+	@Test
+	public void testModify() {
+		BoardVO vo = new BoardVO();
+		
+		vo.setBno(1507382);
+		vo.setTitle("상현");
+		vo.setContent("원기");
+		vo.setWriter("바보");
+				
+		mapper.modify(vo);
+	}
 }
