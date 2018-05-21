@@ -10,7 +10,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/resources/css/main.css?ver=2" />
+
 <style>
+
+
 .search1 {
 	text-align: center;
 }
@@ -111,6 +114,7 @@ background-color:pink;
 	padding-right: 50px;
 	white-space: nowrap;
 	margin-bottom: 0;
+	cursor: pointer;
 }
 
 .title {
@@ -208,12 +212,12 @@ background-color:pink;
 					</thead>
 					<tbody>
 						<c:forEach items="${list}" var="vo">
-							<tr>
+							<tr >
 								<td><c:out value="${vo.bno}" /></td>
 
 
-								<td class="box"><span class="title"> <c:out
-											value="${vo.title}" />
+								<td class="box" data-bno='${vo.bno}' ><span class="title"> <c:out
+											value="${vo.title}"  />
 								</span> <span class="ico"> <c:if test="${vo.checkNew()}">
 											<img src="/resources/images/new.gif">
 										</c:if>
@@ -249,6 +253,7 @@ background-color:pink;
 				<div class="row uniform" id="selectbox">
 						<div class="3u 12u$(small)">
 							<div class="select-wrapper">
+<<<<<<< HEAD
 
 								<table>
 									<tbody>
@@ -267,7 +272,10 @@ background-color:pink;
 														<c:out value="${cri.type eq 'tcw'?'selected':''}"/>>title+content+writer</option>
 											</select></td>
 
-								<select name="type" id="type"> <
+								
+
+								<select name="type" id="type"> 
+
 									<option value="">- Category -</option>
 									<option value="t"
 										<c:out value="${cri.type eq 't'?'selected':''}"/>>title</option>
@@ -340,13 +348,39 @@ background-color:pink;
   <script>
   $(document).ready(function () {
 	$("#search").on("click",function(e){
-		console.log("click.............")
+		console.log("click.............");
 	
-	self.location="/board/list?"+'${pm.makeQuery(1)}'+"&type="+$("select option:selected").val()+
+	self.location="/board/list"+'${pm.makeQuery(1)}'+"&type="+$("select option:selected").val()+
 	"&keyword="+encodeURIComponent($('#query').val());
 	});
 });
   
+  $(".box").on("click",function(e){
+	  console.log("클릭~~~~~~~~~~~~~~");
+	 var bno =$(this).attr("data-bno");
+	 var page = "${cri.page}" ;
+	 self.location="/board/view?bno=" +bno+"&${pm.makeURL(cri.page)}";
+  });
+  
+  $("#register").on("click", function(e){
+	  console.log("click...");
+	 self.location="/board/register?${pm.makeURL(cri.page)}";
+  });
+  
+  $(document).ready(function () {
+	   var msg = '<c:out value="${msg}"/>';
+		
+		if(msg=="success" && !history.state){
+			alert("등록이 완료되었습니다."); 
+		}
+		if(msg=="fail" && !history.state){
+			alert("등록이 실패하였습니다."); 
+		}
+		if(msg=="remove" && !history.state){
+			alert("삭제가 완료되었습니다.")
+		}
+		history.replaceState({}, null, null);				
+	});
   
   </script>
 

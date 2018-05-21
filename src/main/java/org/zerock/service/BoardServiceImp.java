@@ -28,4 +28,28 @@ public class BoardServiceImp implements BoardService{
 		return mapper.getCount(cri);
 	}
 
+	@Override
+	public BoardVO view(int bno) {
+		
+		return mapper.view(bno);
+	}
+
+	@Override
+	public int remove(int bno) {
+		
+		return mapper.remove(bno);
+	}
+
+	@Override
+	public int insert(BoardVO vo) {
+		
+		return mapper.insert(vo);
+	}
+
+	@Override
+	public int modify(BoardVO vo) {
+		
+		return mapper.modify(vo);
+	}
+
 }
