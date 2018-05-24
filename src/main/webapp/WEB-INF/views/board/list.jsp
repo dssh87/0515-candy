@@ -64,6 +64,7 @@ background-color:pink;
 	padding-right: 50px;
 	white-space: nowrap;
 	margin-bottom: 0;
+	cursor: pointer;
 }
 
 .title {
@@ -181,7 +182,7 @@ background-color:pink;
 				<div class="row uniform" id="selectbox">
 						<div class="3u 12u$(small)">
 							<div class="select-wrapper">
-								<select name="type" id="type"> <
+								<select name="type" id="type"> 
 									<option value="">- Category -</option>
 									<option value="t"
 										<c:out value="${cri.type eq 't'?'selected':''}"/>>title</option>
@@ -232,9 +233,12 @@ background-color:pink;
   $(document).ready(function () {
 	$("#search").on("click",function(e){
 		console.log("click.............");
+	var type = $("select option:selected").val();
+	var keyword = encodeURIComponent($('#query').val());
 	
-	self.location="/board/list"+'${pm.makeQuery(1)}'+"&type="+$("select option:selected").val()+
-	"&keyword="+encodeURIComponent($('#query').val());
+	if(type != null && type != "" && keyword != null && keyword != ""){
+	self.location="/board/list"+'${pm.makeQuery(1)}'+"&type="+type+	"&keyword="+keyword;
+	}
 	});
 });
   
@@ -247,7 +251,7 @@ background-color:pink;
   
   $("#register").on("click", function(e){
 	  console.log("click...");
-	 self.location="/board/register" ;
+	 self.location="/board/register?${pm.makeURL(cri.page)}";
   });
   
   $(document).ready(function () {
@@ -259,7 +263,12 @@ background-color:pink;
 		if(msg=="fail" && !history.state){
 			alert("등록이 실패하였습니다."); 
 		}
-
+		if(msg=="remove" && !history.state){
+			alert("삭제가 완료되었습니다.")
+		}
+		if(msg=="modify" && !history.state){
+			alert("수정이 완료되었습니다.")
+		}
 		history.replaceState({}, null, null);				
 	});
   

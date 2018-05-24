@@ -105,9 +105,10 @@
 <div class="outer">
         <div class="mytable">
             <h3>Register</h3>
-            <form method="post" >
+             
                 <div class="row uniform">
                     <div class="6u 12u$(xsmall)">
+                     <form method="post" >
                         <input type="text" name="title" id="name" 
                             placeholder="title" />
                     </div>
@@ -120,17 +121,20 @@
                             placeholder="Enter your context" rows="20" class="powerbtn"></textarea>
                     </div>
                     <div class="12u$">
-                        <ul class="actions">
+                    <ul class="actions" style="float: left;">
+                    
+          
                             <li><button type="submit" class="register">REGISTER</button></li>
-                            <li><button type="submit" class="bluebtn">Modify</button></li>
-                            <li><button type="submit" class="bluebtn">Delete</button></li>
-                            
-                            <li><input type="reset" value="Reset" class="special" /></li>
-                            <li><button type="reset" class="special2" >On</button></li>
+         					<li><input type="reset" value="Reset" class="special"/></li>
+         					<li><button type="submit" class="fileupload">fileupload</button></li>
+           			 </form>
+           			 </ul>
+                        <ul class="actions" style="float: right;">
+                            <li><button type="submit" class="bluebtn">back</button></li>                          
+                        
                         </ul>
                     </div>
                 </div>
-            </form>
             <hr />
         </div></div>
     </div>
@@ -139,6 +143,38 @@
   integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
   
+  <script>
+  $(document).ready(function () {
+	
+	  
+	$(".bluebtn").on("click",function(e){
+		console.log("click.............");
+		
+		alert("go Back");
+		/* 
+		var pageNo = <c:out value="${cri.page}"/>;
+		var typeStr = '<c:out value="${cri.type}"/>';
+		var keywordStr = '<c:out value="${cri.keyword}"/>';
+		
+		var linkList = "page="+pageNo
+		var linkStr = "page="+pageNo+"&type="+typeStr+"&keyword="+encodeURIComponent(keywordStr);
+		
+		console.log("-----------------------------");
+		console.log(linkStr);
+		 */
+	
+		self.location='${cri.getLink("/board/list")}';  
+		
+		/* self.location="/board/list?page="+"${pm.page}"; */
+			 
+			
+		  });
+		  
+	
+});
+
+  </script>
+	
  
     
     <!-- Footer -->

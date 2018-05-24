@@ -71,58 +71,67 @@ display: inline;
 		<div class="outer">
 			<div class="mytable">
 				<div class="table-wrapper">
-					<h3>View</h3>
+					<h3>Modify</h3>
 					<table class="alt">
 						<thead>
 							<tr>
-								<th>${view.bno}</th>
+								<th><input type="text" name="title" value="${view.title }"></th>
 							</tr>
 						</thead>
+						<form role="form" method="post" >	
+						
+						<input type="hidden" name="page" value="${cri.page}">
+						<input type="hidden" name="bno" value="${view.bno}">
+						
 						<tbody>
 							<tr>
-								<td colspan="2"><strong>${view.title }</strong></td>
+								<strong>${view.bno}</strong>
 							</tr>
 							<tr>
-								<td style="border-right: hidden; border-left: hidden;">${view.writer }</td>
-					<td width=50% style="text-align: right; border-right: hidden;">
-			
-					regdate <fmt:formatDate  value="${view.regdate}"	pattern="yyyy-MM-dd hh:mm"/><br>
-					update <fmt:formatDate value="${view.updatedate}"	pattern="yyyy-MM-dd hh:mm" />
+								<td style="border-right: hidden; border-left: hidden;">
+								<input name="writer" type="text" value="${view.writer}" readonly="readonly">
+								
+								</td>
+								<td width=50% style="text-align: right; border-right: hidden;">
+									<fmt:formatDate value="${view.regdate}"
+										pattern="yyyy-MM-dd hh:mm" />
+								</td>
+							</tr>
+							<tr>
+								<td class="contentbox" colspan="2">
+									
+								<input class="contentbox" name="content" type="text" value="${view.content}">
+								
+								</td>
+							</tr>
 					
-								</td>
-							</tr>
-							<tr>
-								<td colspan="2">
-									<div class="contentbox">${view.content}</div>
-								</td>
-							</tr>
 						</tbody>
+									</form>	
 						<tfoot>
 							<tr>
 								<td colspan="2">
 								
 									<ul class="actions" style="float: left;">
 									<div style = "float: left">
-									<form action="/board/modify">
-									<input type="hidden" name="bno" value="${view.bno}">
-									<input type="hidden" name="type" value="${cri.type}">
-									<input type="hidden" name="keyword" value="${cri.keyword}">
-									<input type="hidden" name="page" value="${cri.page}">
-									<li><button type="submit" class="modify">Modify</button></li>
-									</form>
+					
+									<li><button type="submit" class="modify">save</button></li>
+					
 									</div>
+									
+								
+									
 									<div style = "float: left; padding: 0 10px">
 									<form method="post" action="/board/remove">							
 									 	<input type="hidden" name="bno" value="${view.bno}">
 									 	<input type="hidden" name="makeUri" value="${pm.makeURL(cri.page)}">
 										<li><button type="submit" class="remove">remove</button></li>
+									<li><button type="submit" class="fileupload">fileupload</button></li>									
 									</form>
 									</div>
 									</ul>
 								
 								
 									<ul class="actions" style="float: right;">
-																		
 											<li><button id="back">back</button></li>
 										
 									</ul>
@@ -147,7 +156,7 @@ display: inline;
 	$("#back").on("click",function(e){
 		console.log("click.............");
 		
-		alert("이전 페이지로 이동합니다.");
+		alert("조회페이지로 이동합니다.");
 		/* 
 		var pageNo = <c:out value="${cri.page}"/>;
 		var typeStr = '<c:out value="${cri.type}"/>';
@@ -160,17 +169,17 @@ display: inline;
 		console.log(linkStr);
 		 */
 		
-		self.location='${cri.getLink("/board/list")}';	
+		self.location='${cri.getLink("/board/view")}'+'&bno='+'${view.bno}';	
 		
 	});
 	
-/* 	$(".modify").on("click",function(e){
-		
-		self.location ='${cri.getLink("/board/modify")}';
-		
-	});
-	 */
+	var formObj = $("form[role='form']");
 	
+	$(".modify").on("click", function(){
+		console.log("click...")
+		
+		formObj.submit();
+	});
 	
 
 });
