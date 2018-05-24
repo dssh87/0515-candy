@@ -75,6 +75,7 @@ display: inline;
 					<table class="alt">
 						<thead>
 							<tr>
+
 								<th><input type="text" name="title" value="${view.title }"></th>
 							</tr>
 						</thead>
@@ -92,12 +93,14 @@ display: inline;
 								<input name="writer" type="text" value="${view.writer}" readonly="readonly">
 								
 								</td>
+                
 								<td width=50% style="text-align: right; border-right: hidden;">
 									<fmt:formatDate value="${view.regdate}"
 										pattern="yyyy-MM-dd hh:mm" />
 								</td>
 							</tr>
 							<tr>
+
 								<td class="contentbox" colspan="2">
 									
 								<input class="contentbox" name="content" type="text" value="${view.content}">
@@ -107,32 +110,34 @@ display: inline;
 					
 						</tbody>
 									</form>	
+
 						<tfoot>
 							<tr>
 								<td colspan="2">
 								
 									<ul class="actions" style="float: left;">
 									<div style = "float: left">
+
 					
 									<li><button type="submit" class="modify">save</button></li>
 					
 									</div>
-									
-								
-									
-									<div style = "float: left; padding: 0 10px">
+                    
+							<div style = "float: left; padding: 0 10px">
 									<form method="post" action="/board/remove">							
 									 	<input type="hidden" name="bno" value="${view.bno}">
 									 	<input type="hidden" name="makeUri" value="${pm.makeURL(cri.page)}">
 										<li><button type="submit" class="remove">remove</button></li>
+
 									<li><button type="submit" class="fileupload">fileupload</button></li>									
+
 									</form>
 									</div>
 									</ul>
 								
-								
-									<ul class="actions" style="float: right;">
+								<ul class="actions" style="float: right;">
 											<li><button id="back">back</button></li>
+
 										
 									</ul>
 								</td>
@@ -153,10 +158,12 @@ display: inline;
   $(document).ready(function () {
 	
 	  
+
 	$("#back").on("click",function(e){
 		console.log("click.............");
 		
 		alert("조회페이지로 이동합니다.");
+
 		/* 
 		var pageNo = <c:out value="${cri.page}"/>;
 		var typeStr = '<c:out value="${cri.type}"/>';
@@ -169,6 +176,7 @@ display: inline;
 		console.log(linkStr);
 		 */
 		
+
 		self.location='${cri.getLink("/board/view")}'+'&bno='+'${view.bno}';	
 		
 	});
@@ -180,6 +188,7 @@ display: inline;
 		
 		formObj.submit();
 	});
+
 	
 
 });

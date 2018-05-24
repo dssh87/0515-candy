@@ -81,9 +81,8 @@ public class BoardController {
 	@GetMapping("modify")
 	public void getmodify(@ModelAttribute("cri")Criteria cri, Integer bno, Model model) {
 		model.addAttribute("view",service.view(bno));		
-	
+
 	}
-	
 	
 	@PostMapping("modify")
 	public String postmodify(@ModelAttribute("vo")BoardVO vo, RedirectAttributes rttr,
@@ -99,10 +98,12 @@ public class BoardController {
 		rttr.addFlashAttribute("msg","modify");
 		
 		return "redirect:"+cri.getLink("/board/view"); 
+
 		
 	}
 	
 	
+
 	@GetMapping("index")
 	public void index() {
 		
