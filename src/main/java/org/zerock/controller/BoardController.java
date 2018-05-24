@@ -81,17 +81,29 @@ public class BoardController {
 	@GetMapping("modify")
 	public void getmodify(@ModelAttribute("cri")Criteria cri, Integer bno, Model model) {
 		model.addAttribute("view",service.view(bno));		
-		
+
 	}
-	
 	
 	@PostMapping("modify")
-	public void postmodify(@ModelAttribute("vo")BoardVO vo, RedirectAttributes rttr) {
-		
+	public String postmodify(@ModelAttribute("vo")BoardVO vo, RedirectAttributes rttr,
+			@ModelAttribute("cri")Criteria cri) {
+			
+		log.info("아무거나요................"+vo);
+		log.info("CRI..."+cri);
 		service.modify(vo);
+		
+		rttr.addAttribute("bno", vo.getBno());
+		rttr.addAttribute("page", cri.getPage());
+		
+		rttr.addFlashAttribute("msg","modify");
+		
+		return "redirect:"+cri.getLink("/board/view"); 
+
+		
 	}
 	
 	
+
 	@GetMapping("index")
 	public void index() {
 		

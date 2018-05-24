@@ -121,13 +121,18 @@
                             placeholder="Enter your context" rows="20" class="powerbtn"></textarea>
                     </div>
                     <div class="12u$">
-                        <ul class="actions">
+
+                    <ul class="actions" style="float: left;">
+                    
           
                             <li><button type="submit" class="register">REGISTER</button></li>
+         					<li><input type="reset" value="Reset" class="special"/></li>
+         					<li><button type="submit" class="fileupload">fileupload</button></li>
            			 </form>
-         					<li><input type="reset" value="Reset" class="special" /></li>
-                            <li><button type="submit" class="bluebtn">back</button></li>
-                           
+           			 </ul>
+                        <ul class="actions" style="float: right;">
+                            <li><button type="submit" class="bluebtn">back</button></li>                          
+
                         
                         </ul>
                     </div>
