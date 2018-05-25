@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/resources/css/main.css" />
 <style>
 .contentbox {
-	min-height: 500px;
+	min-height: 200px;
 }
 
 .mytable {
@@ -37,7 +37,6 @@
 .action{
 display: inline;
 }
-
 
 </style>
 </head>
@@ -118,18 +117,18 @@ display: inline;
 										<li><button type="submit" class="remove">remove</button></li>
 									</form>
 									</div>
-									</ul>
+									</ul>								
 								
-								
-									<ul class="actions" style="float: right;">
-																		
-											<li><button id="back">back</button></li>
-										
+									<ul class="actions" style="float: right;">																		
+											<li><button id="back">back</button></li>										
 									</ul>
 								</td>
 							</tr>
 						</tfoot>
 					</table>
+					
+					
+					
 				</div>
 			</div>
 		</div>
