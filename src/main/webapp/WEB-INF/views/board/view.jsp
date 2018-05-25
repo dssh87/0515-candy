@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="/resources/css/main.css" />
 <style>
 .contentbox {
-	min-height: 500px;
+	min-height: 200px;
 }
 
 .mytable {
@@ -37,7 +37,6 @@
 .action{
 display: inline;
 }
-
 
 </style>
 </head>
@@ -105,7 +104,10 @@ display: inline;
 									<div style = "float: left">
 									<form action="/board/modify">
 									<input type="hidden" name="bno" value="${view.bno}">
-									<li><button type="submit" class="modify">Modify</button></li>
+									<input type="hidden" name="type" value="${cri.type}">
+									<input type="hidden" name="keyword" value="${cri.keyword}">
+									<input type="hidden" name="page" value="${cri.page}">
+                  <li><button type="submit" class="modify">Modify</button></li>
 									</form>
 									</div>
 									<div style = "float: left; padding: 0 10px">
@@ -115,17 +117,21 @@ display: inline;
 										<li><button type="submit" class="remove">remove</button></li>
 									</form>
 									</div>
+									</ul>								
+
 									</ul>
 								
-								
-									<ul class="actions" style="float: right;">									
-											<li><button id="goList">goList</button></li>
-										
+									<ul class="actions" style="float: right;">																		
+											<li><button id="back">back</button></li>										
 									</ul>
+
 								</td>
 							</tr>
 						</tfoot>
 					</table>
+					
+					
+					
 				</div>
 			</div>
 		</div>
@@ -140,10 +146,10 @@ display: inline;
   $(document).ready(function () {
 	
 	  
-	$("#goList").on("click",function(e){
+	$("#back").on("click",function(e){
 		console.log("click.............");
 		
-		alert("go List");
+		alert("이전 페이지로 이동합니다.");
 		/* 
 		var pageNo = <c:out value="${cri.page}"/>;
 		var typeStr = '<c:out value="${cri.type}"/>';

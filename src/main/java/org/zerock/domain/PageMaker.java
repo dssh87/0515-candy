@@ -64,13 +64,17 @@ public class PageMaker {
 		builder.append("page=");
 		builder.append(page);
 
-		if (cri.getType() != null) {
+
+		if (cri.getType() != null && cri.getType() != "") {
+
 			builder.append("&");
 			builder.append("type=");
 			builder.append(cri.getType());
 		}
 
-		if (cri.getKeyword() != null) {
+
+		if (cri.getKeyword() != null && cri.getKeyword() != "") {
+
 			builder.append("&");
 			builder.append("keyword=");
 			builder.append(encoding(cri.getKeyword()));

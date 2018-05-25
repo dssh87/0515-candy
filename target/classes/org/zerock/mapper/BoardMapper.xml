@@ -6,30 +6,18 @@
 
 <mapper namespace="org.zerock.mapper.BoardMapper">
 
-	<sql id="search">
-
-		<where>
-			<if test="arr !=null">
-				<foreach separator="OR" open="("  close=")" item="type" collection="arr">
-					<if test="type eq 't'.toString()">title like concat('%',#{keyword},'%')</if>
-					<if test="type eq 'c'.toString()">content like concat('%',#{keyword},'%')</if>
-					<if test="type eq 'w'.toString()">writer like concat('%',#{keyword},'%')</if>
-				</foreach>
-			</if>
-		</where>
-	</sql>
-
-	<select id="list" resultType="org.zerock.domain.BoardVO">
-
+<select id="list" resultType="org.zerock.domain.BoardVO">
+		<![CDATA[
 		select bno,title,writer,regdate,updatedate
-		from tbl_aboard <include refid="search"/>
-		order by bno desc limit #{skip},10
+		,(SELECT IF(DATE_SUB(NOW(), INTERVAL 1 DAY) <= regdate, 1, 0)) newIcon
+		 from tbl_aboard order by bno desc
+		limit #{skip},10 
+		]]>
+</select>
 
-	</select>
 
-
-	<select id="getCount" resultType="int">
-		select count(*) from tbl_aboard <include refid="search"/>
-	</select>
+<select id="getCount" resultType="int">
+select count(*) from tbl_aboard
+</select>
 
 </mapper>

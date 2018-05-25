@@ -233,9 +233,12 @@ background-color:pink;
   $(document).ready(function () {
 	$("#search").on("click",function(e){
 		console.log("click.............");
+	var type = $("select option:selected").val();
+	var keyword = encodeURIComponent($('#query').val());
 	
-	self.location="/board/list"+'${pm.makeQuery(1)}'+"&type="+$("select option:selected").val()+
-	"&keyword="+encodeURIComponent($('#query').val());
+	if(type != null && type != "" && keyword != null && keyword != ""){
+	self.location="/board/list"+'${pm.makeQuery(1)}'+"&type="+type+	"&keyword="+keyword;
+	}
 	});
 });
   
@@ -263,6 +266,11 @@ background-color:pink;
 		if(msg=="remove" && !history.state){
 			alert("삭제가 완료되었습니다.")
 		}
+
+		if(msg=="modify" && !history.state){
+			alert("수정이 완료되었습니다.")
+		}
+
 		history.replaceState({}, null, null);				
 	});
   
