@@ -107,7 +107,7 @@ display: inline;
 									<input type="hidden" name="type" value="${cri.type}">
 									<input type="hidden" name="keyword" value="${cri.keyword}">
 									<input type="hidden" name="page" value="${cri.page}">
-									<li><button type="submit" class="modify">Modify</button></li>
+                  <li><button type="submit" class="modify">Modify</button></li>
 									</form>
 									</div>
 									<div style = "float: left; padding: 0 10px">
@@ -118,10 +118,13 @@ display: inline;
 									</form>
 									</div>
 									</ul>								
+
+									</ul>
 								
 									<ul class="actions" style="float: right;">																		
 											<li><button id="back">back</button></li>										
 									</ul>
+
 								</td>
 							</tr>
 						</tfoot>

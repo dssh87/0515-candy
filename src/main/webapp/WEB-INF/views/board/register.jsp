@@ -121,6 +121,7 @@
                             placeholder="Enter your context" rows="20" class="powerbtn"></textarea>
                     </div>
                     <div class="12u$">
+
                     <ul class="actions" style="float: left;">
                     
           
@@ -131,6 +132,7 @@
            			 </ul>
                         <ul class="actions" style="float: right;">
                             <li><button type="submit" class="bluebtn">back</button></li>                          
+
                         
                         </ul>
                     </div>

@@ -266,9 +266,11 @@ background-color:pink;
 		if(msg=="remove" && !history.state){
 			alert("삭제가 완료되었습니다.")
 		}
+
 		if(msg=="modify" && !history.state){
 			alert("수정이 완료되었습니다.")
 		}
+
 		history.replaceState({}, null, null);				
 	});
   
