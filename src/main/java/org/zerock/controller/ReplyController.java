@@ -25,6 +25,7 @@ import lombok.extern.log4j.Log4j;
 @RestController
 @RequestMapping("/reply/*")
 @Log4j
+
 public class ReplyController {
 	
 	@Setter(onMethod_ = { @Autowired })
