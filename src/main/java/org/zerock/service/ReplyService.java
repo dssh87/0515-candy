@@ -12,4 +12,12 @@ public interface ReplyService {
 
 	public int Count(Integer bno);
 
+	public int insert(ReplyVO vo);
+
+	public ReplyVO view(Integer rno);
+
+	public int modify(ReplyVO vo);
+
+	public int remove(Integer rno);
+
 }

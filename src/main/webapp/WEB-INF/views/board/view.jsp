@@ -15,6 +15,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link rel="stylesheet" href="/resources/css/main.css" />
 <style>
+
 .contentbox {
 	min-height: 200px;
 }
@@ -37,6 +38,54 @@
 .action{
 display: inline;
 }
+.reply{
+float: right;
+}
+li{
+list-style: none;
+}
+.pageNation {
+	display: inline-block;
+}
+
+.pageNation a {
+	color: black;
+	float: left;
+	padding: 8px 5px;
+	text-decoration: none;
+}
+
+.pageNation a.active {
+	background-color: pink;
+	color: white;
+}
+
+.pageNation a :hover :not(.active){
+background-color:pink;
+}
+
+ #modalLayer{
+        display:inline-block;
+        position:relative;
+    }
+    #modalLayer .modalContent{
+        width:60%;
+        height:200px;
+        padding:20px;
+        border:1px solid #ccc;
+        position:fixed;
+        left:20%;
+        top:50%;
+        z-index:11;
+		background-color: #ffffff;
+		background-color: rgba(255, 255, 255, 1);
+    }
+    #modalLayer .modalContent button{
+        position:relative;
+        right:0;
+        top:0;
+        cursor:pointer;
+    }
 
 </style>
 </head>
@@ -128,11 +177,65 @@ display: inline;
 								</td>
 							</tr>
 						</tfoot>
-					</table>
-					
-					
-					
+					</table>					
 				</div>
+				
+				<h3>Reply</h3>
+				<table class="alt">
+							
+						<thead>
+							<tr class="contentbox">
+								<th><input type="text" id="rcontent" placeholder="내용을 입력하세요" ></th>
+							</tr>
+							<tr>
+								<th><input type="text" id="replyer" placeholder="작성자"></th>
+								</tr>
+								<tr>						
+						        <th><button type="submit" class="reply" >댓글 등록</button></th>
+						        </tr>
+						</thead>
+						
+						
+						</table>
+						
+				
+			<div class="table-wrapper">
+				<table style="table-layout: fixed;">
+					<colgroup>
+						<col style="width: 20%;" />
+						<col style="width: 40%;" />
+						<col style="width: 20%;" />
+						<col style="width: 20%;" />
+
+					</colgroup>
+					<thead>
+					<tr>						
+						<div class="listDiv"></div>
+						</tr>
+					</thead>
+					
+											
+				</table>
+				<div class="pageNation"></div>
+			</div>
+			
+			
+			
+			
+			<div id="modalLayer">
+    <div class="modalContent" >
+        <input type="text" id="mrcontent">
+        <input type="text" id="mreplyer" >
+        <button class="modify" data-rno="data.rno" >완료</button>
+        <button class="remove" data-rno="data.rno">삭제</button>
+        <button class="close">닫기</button>
+    </div>
+</div>
+			
+			</div>
+		</div>
+		</div>
+				
 			</div>
 		</div>
 	</div>
@@ -150,32 +253,223 @@ display: inline;
 		console.log("click.............");
 		
 		alert("이전 페이지로 이동합니다.");
-		/* 
-		var pageNo = <c:out value="${cri.page}"/>;
-		var typeStr = '<c:out value="${cri.type}"/>';
-		var keywordStr = '<c:out value="${cri.keyword}"/>';
-		
-		var linkList = "page="+pageNo
-		var linkStr = "page="+pageNo+"&type="+typeStr+"&keyword="+encodeURIComponent(keywordStr);
-		
-		console.log("-----------------------------");
-		console.log(linkStr);
-		 */
-		
-		self.location='${cri.getLink("/board/list")}';	
+				
+		self.location='${cri.getLink("/board/list")}';			
+	});	
+});
+  
+  $(document).ready(function () {
+
+	  var bno = ${view.bno};
+      var listDiv = $(".listDiv");
+      var inputReplyer = $("#replyer");
+      var inputRcontent = $("#rcontent");
+      var inputMrcontent = $("#mrcontent");
+      var inputMreplyer = $("#mreplyer");
+      var pageNation = $(".pageNation");
+
+      var reply = $(".reply");
+      var modify = $(".modify");
+      var repage = 1;
+      
+      function getPageList(bno, page) {
+          var page = page || 1;
+          var bno = bno || 1;
+          
+          $.getJSON("/reply/"+bno+"/"+page+".json", function (data) {
+        	  console.log(data.length);
+        	  console.log(data);
+        	  console.dir(data);
+              var str = "";
+
+              $(data.list).each(function (idx,data) {
+
+                  str += "<li data-rno="+data.rno+">"+
+                      "<div>"+"<th>"+data.rcontent+"</th>"+"<th>"+data.replyer+"</th>"+
+						"<th>"+data.regdate+"</th>"+"<button type='button' class='modalLink' data-rno="+data.rno+"> 수정</button></tr></div></li>";
+              });
+
+              listDiv.html(str);
+
+              printPaging(data.pm);
+          });
+      }
+      
+      function printPaging(pm){
+          console.log(pm);
+
+          var str = "";
+
+          if(pm.prev){
+              str += "<li><a href="+(pm.start-1)+"> << </a></li>";
+          }
+
+          for(var i = pm.start, len = pm.end; i <=len; i++) {
+              var strClass = pm.cri.page == i ? 'class = active' : '';
+              str+="<li"+strClass+"><a href="+i+">"+i+"</a></li>";
+          }
+
+
+           if(pm.next){
+              str += "<li><a href="+(pm.end + 1)+"> >> </a></li>";
+          }
+          pageNation.html(str);
+      }
+      
+	function register(data){
+
+        var data = {bno:bno, rcontent: inputRcontent.val(), replyer: inputReplyer.val()};
+
+        $.ajax({
+            type: "post",
+            url: "/reply/new" ,
+            headers:{
+                "Content-type":"application/json",
+                "X-HTTP-Method-Override": "post"
+            },
+            dataType:"text",
+            data:JSON.stringify(data),
+            success: function (result) {
+                console.log("result............"+result);
+
+                inputRcontent.val("");
+                inputReplyer.val("");
+
+                getPageList(bno, 1);
+
+            }
+        });
+    }
+	
+	function view(rno){
+
+        $.getJSON("/reply/"+rno+".json" , function(data){
+        	inputMrcontent.val(data.rcontent);
+            inputMreplyer.val(data.replyer);
+            $(".remove").attr("data-rno", rno);
+            $(".modify").attr("data-rno", rno);
+            }
+        );
+    }
+
+    function remove(rno) {
+
+        $.ajax({
+            type:'delete',
+            url:"/reply/"+rno,
+            headers: {
+                "Content-type": "application/json",
+                "X-HTTP-Method-Override": "DELETE"
+            },
+            dataType:"text",
+            success:function(result){
+                console.log("result: ",result);
+                
+                $(".modalContent").hide();
+                getPageList(bno, 1);
+            }
+        });
+    }
+
+    function modify(rno){
+
+        var rno = reply.attr("data-rno");
+        var data = {bno:bno, rcontent: inputRcontent.val(), replyer: inputReplyer.val()};
+
+        $.ajax({
+            type:'put',
+            url:"/reply/"+rno,
+            headers: {
+                "Content-type": "application/json",
+                "X-HTTP-Method-Override": "DELETE"
+            },
+            dataType:"text",
+            data:JSON.stringify(data),
+            success:function(result){
+                console.log("result: " + result);
+                getPageList(repage);
+            }
+        });
+    }
+	
+	$(".reply").on("click",function () {
+
+        register();
+        
+    });
+	
+	getPageList(bno, 1);
+	
+	$(".pageNation").on("click","li a",function (e) {
+
+        e.preventDefault();
+
+        repage = $(this).attr("href");
+        console.log(repage);
+        getPageList(repage);
+
+    });
+	
+	$(".modalContent").hide();
+	
+	listDiv.on("click", "button", function(data){
+		console.log("클릭...");
+		var rno = $(this).attr("data-rno");
+        
+        view(rno);
+		 
+		$(".modalContent").show();
 		
 	});
-	
-/* 	$(".modify").on("click",function(e){
-		
-		self.location ='${cri.getLink("/board/modify")}';
+	$(".modalContent").on("click", ".close", function(e){
+		$(".modalContent").hide();
 		
 	});
-	 */
-	
 	
 
-});
+    $(".modalContent").on("click", ".remove", function (e) {
+
+        var rno = $(this).attr("data-rno");
+        
+        console.log(this);
+        console.log(rno);
+        if(confirm("remove:" + rno)){
+            remove(rno);
+        }
+    });
+    
+    $(document).ready(function(){
+        var modalLayer = $("#modalLayer");
+        var modalLink = $(".modalLink");
+        var modalCont = $(".modalContent");
+        var marginLeft = modalCont.outerWidth()/2;
+        var marginTop = modalCont.outerHeight()/2;
+        var modify = $(".modify");
+
+        $(".listDiv").on("click", ".modalLink", function(e){
+            modalLayer.fadeIn("slow");
+            modalCont.css({"margin-top" : -marginTop, "margin-left" : -marginLeft});
+            $(this).blur();
+            $(".modalContent > a").focus();
+            return false;
+        });
+
+        $(".modalContent").on("click",".close",function(){
+            modalLayer.fadeOut("slow");
+            modalLink.focus();
+        });
+
+        $(".modalContent").on("click",".modify",function(){
+            var rno = $(this).attr("data-rno");
+            
+
+            modify(rno);
+        });
+    });
+	
+	
+	
+  });
 
   </script>
 	
