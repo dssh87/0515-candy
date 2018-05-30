@@ -73,11 +73,18 @@ display: inline;
 				<div class="table-wrapper">
 					<h3>Modify</h3>
 					<table class="alt">
+						<form role="form" method="post" >	
 						<thead>
 							<tr>
 								<th>${view.bno}</th>
 							</tr>
 						</thead>
+
+						
+						<input type="hidden" name="page" value="${cri.page}">
+						<input type="hidden" name="bno" value="${view.bno}">
+						
+
 						<tbody>
 							<tr>
 								<strong><input type="text" value="${view.title }"></strong>

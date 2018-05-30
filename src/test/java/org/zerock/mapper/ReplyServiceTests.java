@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.domain.Criteria;
+import org.zerock.domain.ReplyVO;
 import org.zerock.service.ReplyService;
 
 import lombok.Setter;
@@ -26,6 +27,24 @@ public class ReplyServiceTests {
 	@Test
 	public void testCount() {
 		service.Count(1507430);
+	}
+	@Test
+	public void testView() {
+		service.view(100);
+	}
+	
+	@Test
+	public void testUpdate() {
+		ReplyVO vo = new ReplyVO();
+		vo.setRno(100);
+		vo.setRcontent("cjswo");
+		vo.setReplyer("진주");
+		
+		service.modify(vo);
+	}
+	@Test
+	public void testRemove() {
+		service.remove(100);
 	}
 	
 }
