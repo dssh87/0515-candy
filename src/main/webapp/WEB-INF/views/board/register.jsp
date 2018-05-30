@@ -163,15 +163,11 @@
 		
 		console.log("-----------------------------");
 		console.log(linkStr);
-		 */
-	
-		self.location='${cri.getLink("/board/list")}';  
-		
-		/* self.location="/board/list?page="+"${pm.page}"; */
-			 
+		 */	
+		self.location='${cri.getLink("/board/list")}';		
+		/* self.location="/board/list?page="+"${pm.page}"; */	 
 			
-		  });
-		  
+		  });	  
 	
 });
 

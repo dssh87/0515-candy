@@ -44,7 +44,7 @@ float: right;
 li{
 list-style: none;
 }
-.pageNation {
+.pageNation li {
 	display: inline-block;
 }
 
@@ -55,20 +55,20 @@ list-style: none;
 	text-decoration: none;
 }
 
-.pageNation a.active {
+.pageNation .active {
 	background-color: pink;
 	color: white;
 }
 
-.pageNation a :hover :not(.active){
-background-color:pink;
+.pageNation :hover :not(.active){
+	background-color:pink;
 }
 
  #modalLayer{
         display:inline-block;
         position:relative;
-    }
-    #modalLayer .modalContent{
+}
+#modalLayer .modalContent{
         width:60%;
         height:200px;
         padding:20px;
@@ -80,12 +80,13 @@ background-color:pink;
 		background-color: #ffffff;
 		background-color: rgba(255, 255, 255, 1);
     }
-    #modalLayer .modalContent button{
+#modalLayer .modalContent button{
         position:relative;
         right:0;
         top:0;
         cursor:pointer;
-    }
+}
+    
 
 </style>
 </head>
@@ -166,23 +167,22 @@ background-color:pink;
 										<li><button type="submit" class="remove">remove</button></li>
 									</form>
 									</div>
-									</ul>								
+									</ul>					
 
 									</ul>
 								
 									<ul class="actions" style="float: right;">																		
 											<li><button id="back">back</button></li>										
 									</ul>
-
 								</td>
 							</tr>
 						</tfoot>
 					</table>					
 				</div>
 				
+	<!-- reply -->			
 				<h3>Reply</h3>
-				<table class="alt">
-							
+				<table class="alt">							
 						<thead>
 							<tr class="contentbox">
 								<th><input type="text" id="rcontent" placeholder="내용을 입력하세요" ></th>
@@ -193,12 +193,8 @@ background-color:pink;
 								<tr>						
 						        <th><button type="submit" class="reply" >댓글 등록</button></th>
 						        </tr>
-						</thead>
-						
-						
-						</table>
-						
-				
+						</thead>						
+						</table>						
 			<div class="table-wrapper">
 				<table style="table-layout: fixed;">
 					<colgroup>
@@ -206,22 +202,17 @@ background-color:pink;
 						<col style="width: 40%;" />
 						<col style="width: 20%;" />
 						<col style="width: 20%;" />
-
 					</colgroup>
 					<thead>
 					<tr>						
 						<div class="listDiv"></div>
 						</tr>
-					</thead>
-					
-											
+					</thead>											
 				</table>
+				
+			</div>			
 				<div class="pageNation"></div>
-			</div>
-			
-			
-			
-			
+	<!-- modalLayer --> 		
 			<div id="modalLayer">
     <div class="modalContent" >
         <input type="text" id="mrcontent">
@@ -230,12 +221,10 @@ background-color:pink;
         <button class="remove" data-rno="data.rno">삭제</button>
         <button class="close">닫기</button>
     </div>
-</div>
-			
+</div>			
 			</div>
 		</div>
-		</div>
-				
+		</div>				
 			</div>
 		</div>
 	</div>
@@ -246,8 +235,7 @@ background-color:pink;
   crossorigin="anonymous"></script>
   
   <script>
-  $(document).ready(function () {
-	
+  $(document).ready(function () {	
 	  
 	$("#back").on("click",function(e){
 		console.log("click.............");
@@ -257,6 +245,7 @@ background-color:pink;
 		self.location='${cri.getLink("/board/list")}';			
 	});	
 });
+  /* function */
   
   $(document).ready(function () {
 
@@ -268,8 +257,7 @@ background-color:pink;
       var inputMreplyer = $("#mreplyer");
       var pageNation = $(".pageNation");
 
-      var reply = $(".reply");
-      var modify = $(".modify");
+      var reply = $(".reply");      
       var repage = 1;
       
       function getPageList(bno, page) {
@@ -288,15 +276,17 @@ background-color:pink;
                       "<div>"+"<th>"+data.rcontent+"</th>"+"<th>"+data.replyer+"</th>"+
 						"<th>"+data.regdate+"</th>"+"<button type='button' class='modalLink' data-rno="+data.rno+"> 수정</button></tr></div></li>";
               });
-
+              
               listDiv.html(str);
 
+              
               printPaging(data.pm);
           });
       }
       
+      
       function printPaging(pm){
-          console.log(pm);
+          console.log("pm이다1111",pm);
 
           var str = "";
 
@@ -305,8 +295,8 @@ background-color:pink;
           }
 
           for(var i = pm.start, len = pm.end; i <=len; i++) {
-              var strClass = pm.cri.page == i ? 'class = active' : '';
-              str+="<li"+strClass+"><a href="+i+">"+i+"</a></li>";
+              var strClass = pm.cri.page == i ? "class = active" : "";
+              str+="<li "+strClass+"><a href="+i+">"+i+"</a></li>";
           }
 
 
@@ -331,7 +321,11 @@ background-color:pink;
             data:JSON.stringify(data),
             success: function (result) {
                 console.log("result............"+result);
-
+                if(result == "SUCCESS"){
+                	alert("등록완료")
+                }else{
+                	alert("등록실패")
+                }
                 inputRcontent.val("");
                 inputReplyer.val("");
 
@@ -339,7 +333,7 @@ background-color:pink;
 
             }
         });
-    }
+    }	
 	
 	function view(rno){
 
@@ -373,40 +367,49 @@ background-color:pink;
 
     function modify(rno){
 
-        var rno = reply.attr("data-rno");
-        var data = {bno:bno, rcontent: inputRcontent.val(), replyer: inputReplyer.val()};
+        var rno = $(".modify").attr("data-rno");
+        var data = {bno:bno, rcontent: inputMrcontent.val(), replyer: inputMreplyer.val()};
 
         $.ajax({
             type:'put',
             url:"/reply/"+rno,
             headers: {
                 "Content-type": "application/json",
-                "X-HTTP-Method-Override": "DELETE"
+                "X-HTTP-Method-Override": "PUT"
             },
             dataType:"text",
             data:JSON.stringify(data),
             success:function(result){
                 console.log("result: " + result);
-                getPageList(repage);
+                if(result == "success"){
+                	alert("수정완료")
+                }else{
+                	alert("수정실패")
+                }
+                getPageList(bno, 1);
             }
         });
     }
-	
+    
+	/* event */
+    
 	$(".reply").on("click",function () {
-
-        register();
-        
+				
+        	register();
+		
     });
 	
 	getPageList(bno, 1);
 	
 	$(".pageNation").on("click","li a",function (e) {
 
+		console.log("클릭")
         e.preventDefault();
 
         repage = $(this).attr("href");
         console.log(repage);
-        getPageList(repage);
+        console.log(bno);
+        getPageList(bno, repage);
 
     });
 	
@@ -422,10 +425,8 @@ background-color:pink;
 		
 	});
 	$(".modalContent").on("click", ".close", function(e){
-		$(".modalContent").hide();
-		
-	});
-	
+		$(".modalContent").hide();		
+	});	
 
     $(".modalContent").on("click", ".remove", function (e) {
 
@@ -437,6 +438,8 @@ background-color:pink;
             remove(rno);
         }
     });
+   
+    /* modal */
     
     $(document).ready(function(){
         var modalLayer = $("#modalLayer");
@@ -444,7 +447,7 @@ background-color:pink;
         var modalCont = $(".modalContent");
         var marginLeft = modalCont.outerWidth()/2;
         var marginTop = modalCont.outerHeight()/2;
-        var modify = $(".modify");
+        
 
         $(".listDiv").on("click", ".modalLink", function(e){
             modalLayer.fadeIn("slow");
@@ -461,13 +464,11 @@ background-color:pink;
 
         $(".modalContent").on("click",".modify",function(){
             var rno = $(this).attr("data-rno");
-            
+            modalLayer.fadeOut("slow");
 
             modify(rno);
         });
-    });
-	
-	
+    });	
 	
   });
 

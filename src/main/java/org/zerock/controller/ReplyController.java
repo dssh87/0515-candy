@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
 import org.zerock.domain.ReplyVO;
@@ -30,84 +31,85 @@ import lombok.extern.log4j.Log4j;
 @Log4j
 
 public class ReplyController {
-	
+
 	@Setter(onMethod_ = { @Autowired })
 	private ReplyService service;
-	
+
 	@GetMapping("/{bno}/{page}")
-	public ResponseEntity<Map<String, Object>> listPage(@PathVariable("bno")Integer bno, @PathVariable("page") Integer page){
-		ResponseEntity<Map<String,Object>> entity = null;
-		
-		try {			
-			Criteria cri = new Criteria();
-			Map<String,Object> map = new HashMap<String, Object>();
+	public ResponseEntity<Map<String, Object>> listPage(@PathVariable("bno") Integer bno,
+			@PathVariable("page") Integer page) {
+		ResponseEntity<Map<String, Object>> entity = null;
+
+		try {
+			Criteria cri = new Criteria(page);
+			Map<String, Object> map = new HashMap<String, Object>();
 			List<ReplyVO> list = service.list(bno, cri);
 
 			map.put("list", list);
-			
-			
+
 			int replyCount = service.Count(bno);
-						
+
 			map.put("pm", new PageMaker(cri, replyCount));
-			
-			entity = new ResponseEntity<Map<String,Object>>(map, HttpStatus.OK);
-			
-		}catch (Exception e) {
+
+			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
+
+		} catch (Exception e) {
 			e.printStackTrace();
-			entity = new ResponseEntity<Map<String,Object>>(HttpStatus.BAD_REQUEST);
+			entity = new ResponseEntity<Map<String, Object>>(HttpStatus.BAD_REQUEST);
 		}
 
 		return entity;
 	}
-	
+
 	@PostMapping("/new")
-	public ResponseEntity<String> register(@RequestBody ReplyVO vo){
-		ResponseEntity <String> entity = null;
+	public ResponseEntity<String> register(@RequestBody ReplyVO vo) {
+		ResponseEntity<String> entity = null;
 		try {
-		service.insert(vo);
-		entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
-		
-	}catch (Exception e) {
-		e.printStackTrace();
-		entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+			String content = vo.getRcontent();
+			if (content != null && content.trim().length() != 0) {
+
+				service.insert(vo);
+				entity = new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			entity = new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
+		}
+
+		return entity;
+
 	}
 
-	return entity;
-		
-	}
-	
 	@GetMapping("/{rno}")
-	public ResponseEntity<ReplyVO> view(@PathVariable("rno")Integer rno){
-		
-		
-		return new ResponseEntity<ReplyVO>( service.view(rno), HttpStatus.OK);
-		
-		
+	public ResponseEntity<ReplyVO> view(@PathVariable("rno") Integer rno) {
+
+		return new ResponseEntity<ReplyVO>(service.view(rno), HttpStatus.OK);
+
 	}
-	
+
 	@DeleteMapping("/{rno}")
-	public ResponseEntity<String> remove(
-			@PathVariable("rno")Integer rno){
-		
-		String msg =  service.remove(rno) == 1?"success":"fail";
-		
+	public ResponseEntity<String> remove(@PathVariable("rno") Integer rno) {
+
+		String msg = service.remove(rno) == 1 ? "success" : "fail";
+
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
-		
-		
+
 	}
-	
-	
+
 	@PutMapping("/{rno}")
-	public ResponseEntity<String> modify(
-			@PathVariable("rno")Integer rno, @RequestBody ReplyVO vo){
-		
-		vo.setRno(rno);
-		
-		String msg =  service.modify(vo) == 1?"success":"fail";
-		
+	public ResponseEntity<String> modify(@PathVariable("rno") Integer rno, @RequestBody ReplyVO vo) {
+
+		String content = vo.getRcontent();
+		if (content != null && content.trim().length() != 0) {
+
+			vo.setRno(rno);
+		}
+
+		String msg = service.modify(vo) == 1 ? "success" : "fail";
+
 		return new ResponseEntity<String>(msg, HttpStatus.OK);
-		
-		
+
 	}
-	
+
 }
