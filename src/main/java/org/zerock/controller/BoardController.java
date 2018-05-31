@@ -76,20 +76,13 @@ public class BoardController {
 
 		return "redirect:/board/list?" + makeUri;
 
-		
 	}
-	
+
 	@GetMapping("modify")
-	public void getmodify(@ModelAttribute("cri")Criteria cri, Integer bno, Model model) {
-		model.addAttribute("view",service.view(bno));		
-		
-
-
+	public void getmodify(@ModelAttribute("cri") Criteria cri, Integer bno, Model model) {
+		model.addAttribute("view", service.view(bno));
 
 	}
-
-
-
 
 	@PostMapping("modify")
 	public String postmodify(@ModelAttribute("vo") BoardVO vo, RedirectAttributes rttr,
@@ -97,10 +90,7 @@ public class BoardController {
 
 		log.info("아무거나요................" + vo);
 		log.info("CRI..." + cri);
-
 		service.modify(vo);
-
-
 
 		rttr.addAttribute("bno", vo.getBno());
 		rttr.addAttribute("page", cri.getPage());
@@ -109,9 +99,7 @@ public class BoardController {
 
 		return "redirect:" + cri.getLink("/board/view");
 
-
 	}
-
 
 	@GetMapping("index")
 	public void index() {

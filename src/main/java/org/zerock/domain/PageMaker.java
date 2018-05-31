@@ -1,13 +1,7 @@
 package org.zerock.domain;
 
-
-import lombok.Data;
-import lombok.Getter;
-import lombok.ToString;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-
 
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -18,9 +12,7 @@ import lombok.extern.log4j.Log4j;
 
 @ToString
 @Data
-
 @Log4j
-
 public class PageMaker {
 
 	private boolean prev, next;
@@ -72,13 +64,17 @@ public class PageMaker {
 		builder.append("page=");
 		builder.append(page);
 
-		if (cri.getType() != null) {
+
+		if (cri.getType() != null && cri.getType() != "") {
+
 			builder.append("&");
 			builder.append("type=");
 			builder.append(cri.getType());
 		}
 
-		if (cri.getKeyword() != null) {
+
+		if (cri.getKeyword() != null && cri.getKeyword() != "") {
+
 			builder.append("&");
 			builder.append("keyword=");
 			builder.append(encoding(cri.getKeyword()));

@@ -17,7 +17,7 @@
 <style>
 
 .contentbox {
-	min-height: 500px;
+	min-height: 200px;
 }
 
 .mytable {
@@ -88,7 +88,6 @@ list-style: none;
 }
     
 
-
 </style>
 </head>
 <body class="subpage">
@@ -155,7 +154,10 @@ list-style: none;
 									<div style = "float: left">
 									<form action="/board/modify">
 									<input type="hidden" name="bno" value="${view.bno}">
-									<li><button type="submit" class="modify">Modify</button></li>
+									<input type="hidden" name="type" value="${cri.type}">
+									<input type="hidden" name="keyword" value="${cri.keyword}">
+									<input type="hidden" name="page" value="${cri.page}">
+                  <li><button type="submit" class="modify">Modify</button></li>
 									</form>
 									</div>
 									<div style = "float: left; padding: 0 10px">
@@ -164,34 +166,18 @@ list-style: none;
 									 	<input type="hidden" name="makeUri" value="${pm.makeURL(cri.page)}">
 										<li><button type="submit" class="remove">remove</button></li>
 									</form>
-
 									</div>
-
-									
 									</ul>					
 
-									
+									</ul>
 								
 									<ul class="actions" style="float: right;">																		
 											<li><button id="back">back</button></li>										
-
 									</ul>
-
-								
-								
-									<ul class="actions" style="float: right;">									
-											<li><button id="goList">goList</button></li>
-										
-									</ul>
-
 								</td>
 							</tr>
 						</tfoot>
-
-					</table>
-
-										
-
+					</table>					
 				</div>
 				
 	<!-- reply -->			
@@ -251,23 +237,16 @@ list-style: none;
   <script>
   $(document).ready(function () {	
 	  
-	$("#goList").on("click",function(e){
+	$("#back").on("click",function(e){
 		console.log("click.............");
 		
-
-		alert("go List");
-
-		self.location='${cri.getLink("/board/list")}';	
-		
-	});
-	
 		alert("이전 페이지로 이동합니다.");
 				
 		self.location='${cri.getLink("/board/list")}';			
-	});
-
+	});	
 });
   /* function */
+  
   
   $(document).ready(function () {
 
@@ -281,7 +260,7 @@ list-style: none;
 
       var reply = $(".reply");      
       var repage = 1;
-      
+
       function getPageList(bno, page) {
           var page = page || 1;
           var bno = bno || 1;
@@ -296,7 +275,7 @@ list-style: none;
 
                   str += "<li data-rno="+data.rno+">"+
                       "<div>"+"<th>"+data.rcontent+"</th>"+"<th>"+data.replyer+"</th>"+
-						"<th>"+data.regdate+"</th>"+"<button type='button' class='modalLink' data-rno="+data.rno+"> 수정</button></tr></div></li>";
+						"<th>"+displayTime(data.regdate)+"</th>"+"<button type='button' class='modalLink' data-rno="+data.rno+"> 수정</button></tr></div></li>";
               });
               
               listDiv.html(str);
@@ -412,6 +391,39 @@ list-style: none;
             }
         });
     }
+    
+    
+	  function displayTime(timeValue) {
+		  
+		   var today = new Date();	  
+		   
+		   var gap = today.getTime() - timeValue;
+		   
+		   var dateObj = new Date(timeValue);
+		   var str = "";
+		   
+		   if(gap < (1000*60*60*24)){
+		     
+		     var hh = dateObj.getHours();
+		     var mi = dateObj.getMinutes();
+		     var ss = dateObj.getSeconds();
+		     
+		     return [(hh>9 ? '' : '0') + hh, ':',
+		             (mi>9 ? '' : '0') + mi, ':',
+		             (ss>9 ? '' : '0') + ss
+		             ].join('');
+		     
+		   }else {
+		     var yy = dateObj.getFullYear();
+		     var mm = dateObj.getMonth() + 1; // getMonth() is zero-based
+		     var dd = dateObj.getDate();
+		     
+		     return [yy ,'/',
+		           (mm>9 ? '' : '0') + mm, '/',
+		           (dd>9 ? '' : '0') + dd
+		          ].join('');
+		   }
+		 };
     
 	/* event */
     

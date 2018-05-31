@@ -13,6 +13,7 @@
 
 <style>
 
+
 .search1 {
 	text-align: center;
 }
@@ -47,58 +48,8 @@
 	color: white;
 }
 
-<<<<<<< HEAD
-.pagination
-
-
- 
-
-
-a
-
-
-
-
-:hover
-
-
-
-
-:not
-
-
- 
-
-
-(
-.active
-
-
- 
-
-
-){
-background-color
-
-
-
-
-:
-
-
- 
-
-
-pink
-
-
-
-
-;
-
 .pagination a :hover :not(.active){
 background-color:pink;
->>>>>>> refs/heads/master
 }
 
 .search {
@@ -135,29 +86,8 @@ background-color:pink;
 
 }
 
-<<<<<<< HEAD
-.btn {
-	width: 100%;
-	float: left;
-}
-
-.kbtn {
-	width: 100%;
-	float: left;
-}
-
-.sbtn {
-	width: 100%;
-	float: left;
-}
-
-.rbtn {
-	width: 100%;
-}
 
 
-
->>>>>>> refs/heads/master
 </style>
 </head>
 <body class="subpage">
@@ -252,29 +182,7 @@ background-color:pink;
 				<div class="row uniform" id="selectbox">
 						<div class="3u 12u$(small)">
 							<div class="select-wrapper">
-<<<<<<< HEAD
-
-								<table>
-									<tbody>
-										<tr>
-											<td><select name="type" id="type">
-													<option value="">- Category -</option>
-													<option value="t"
-														<c:out value="${cri.type eq 't'?'selected':''}"/>>title</option>
-													<option value="c"
-														<c:out value="${cri.type eq 'c'?'selected':''}"/>>content</option>
-													<option value="w"
-														<c:out value="${cri.type eq 'w'?'selected':''}"/>>writer</option>
-													<option value="tc"
-														<c:out value="${cri.type eq 'tc'?'selected':''}"/>>title+content</option>
-													<option value="tcw"
-														<c:out value="${cri.type eq 'tcw'?'selected':''}"/>>title+content+writer</option>
-											</select></td>
-
-								
-
 								<select name="type" id="type"> 
-
 									<option value="">- Category -</option>
 									<option value="t"
 										<c:out value="${cri.type eq 't'?'selected':''}"/>>title</option>
@@ -292,41 +200,18 @@ background-color:pink;
 						<div class="kbtn">
 							<div class="12u 12u$(small)">
 
-
-
-
-											<div class="kbtn">
-												<div class="4u 12u$(small)">
-													<td><input type="text" name="keyword" id="query"
-														placeholder="input your message"
-														value=<c:out value="${cri.keyword }"/>></td>
-												</div>
-											</div>
-											<div class="sbtn">
-												<div class="6u$ 12u$(small)">
-													<td><input type="submit" value="Search" /></td>
-												</div>
-											</div>
-										</tr>
-									</tbody>
-								</table>
-							</div>
+								<input type="text" name="keyword" id="query"
+									placeholder="input your message"
+									value=<c:out value="${cri.keyword }"/>>
 
 							</div>
 						</div>
 						<div class="sbtn">
 							<div class="12u 12u$(small)">
 								<button id="search"  value="Search"  class="button.fit">Search</button>
-
 						</div>
-
-					</form>
-
-
-
 						</div>
 				
-
 					<div class="rbtn">
 							<div class="12u 12u$(small)">
 						<button id="register">Register</a></button>
@@ -348,9 +233,12 @@ background-color:pink;
   $(document).ready(function () {
 	$("#search").on("click",function(e){
 		console.log("click.............");
+	var type = $("select option:selected").val();
+	var keyword = encodeURIComponent($('#query').val());
 	
-	self.location="/board/list"+'${pm.makeQuery(1)}'+"&type="+$("select option:selected").val()+
-	"&keyword="+encodeURIComponent($('#query').val());
+	if(type != null && type != "" && keyword != null && keyword != ""){
+	self.location="/board/list"+'${pm.makeQuery(1)}'+"&type="+type+	"&keyword="+keyword;
+	}
 	});
 });
   
@@ -378,6 +266,11 @@ background-color:pink;
 		if(msg=="remove" && !history.state){
 			alert("삭제가 완료되었습니다.")
 		}
+
+		if(msg=="modify" && !history.state){
+			alert("수정이 완료되었습니다.")
+		}
+
 		history.replaceState({}, null, null);				
 	});
   

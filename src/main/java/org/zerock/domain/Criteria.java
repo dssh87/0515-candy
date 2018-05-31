@@ -44,10 +44,10 @@ public class Criteria {
 		
 		UriComponentsBuilder builder2 = UriComponentsBuilder.fromPath(path);
 		builder2.queryParam("page", this.page);
-		if(this.type != null) {
+		if(this.type != null && this.type != "") {
 		builder2.queryParam("type", this.type);
 		}
-		if(this.keyword != null) {
+		if(this.keyword != null && this.keyword != "") {
 		builder2.queryParam("keyword", this.keyword);
 		}
 		
