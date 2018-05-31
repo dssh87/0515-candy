@@ -147,7 +147,10 @@ background-color:pink;
 
 								<td class="box" data-bno='${vo.bno}' ><span class="title"> <c:out
 											value="${vo.title}"  />
-								</span> <span class="ico"> <c:if test="${vo.checkNew()}">
+								</span>
+								<span class="recount">[<strong><c:if test="${vo.recount}"></c:if></strong>]
+								</span> 
+								<span class="ico"> <c:if test="${vo.checkNew()}">
 											<img src="/resources/images/new.gif">
 										</c:if>
 								</span>

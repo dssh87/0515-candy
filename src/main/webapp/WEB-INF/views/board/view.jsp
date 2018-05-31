@@ -44,6 +44,12 @@ float: right;
 li{
 list-style: none;
 }
+
+.pageNation{
+display: block;
+text-align: center;
+	
+}
 .pageNation li {
 	display: inline-block;
 }
@@ -86,7 +92,31 @@ list-style: none;
         top:0;
         cursor:pointer;
 }
-    
+
+.modify{
+float: left;
+}
+.remove{
+float: left;
+}
+
+.mmodify{
+width:31.3%;
+margin: 10px 0 0 0 
+
+}
+.mremove{
+width:31.3%
+ 
+}
+.mclose{
+width:31.3%
+
+}
+
+.tmright{
+float: right;
+}    
 
 </style>
 </head>
@@ -217,9 +247,11 @@ list-style: none;
     <div class="modalContent" >
         <input type="text" id="mrcontent">
         <input type="text" id="mreplyer" >
-        <button class="modify" data-rno="data.rno" >완료</button>
-        <button class="remove" data-rno="data.rno">삭제</button>
-        <button class="close">닫기</button>
+        <div class="mbtn">
+        <button class="mmodify" data-rno="data.rno" >완료</button>
+        <button class="mremove" data-rno="data.rno">삭제</button>
+        <button class="mclose">닫기</button>
+        </div>
     </div>
 </div>			
 			</div>
@@ -274,12 +306,17 @@ list-style: none;
               $(data.list).each(function (idx,data) {
 
                   str += "<li data-rno="+data.rno+">"+
+
                       "<div>"+"<th>"+data.rcontent+"</th>"+"<th>"+data.replyer+"</th>"+
 						"<th>"+displayTime(data.regdate)+"</th>"+"<button type='button' class='modalLink' data-rno="+data.rno+"> 수정</button></tr></div></li>";
+
+                      "<div>"+"<tr><th><strong>"+data.replyer+"</strong></th><br>"+"<th>"+data.rcontent+"</th>"+
+						"<div class='tmright'><th>"+displayTime(data.regdate)+"</th>"+"<button type='button' class='modalLink' data-rno="+data.rno+"> 수정</button></div></tr><hr></div></li>";
+                  
+
               });
               
               listDiv.html(str);
-
               
               printPaging(data.pm);
           });
@@ -341,8 +378,8 @@ list-style: none;
         $.getJSON("/reply/"+rno+".json" , function(data){
         	inputMrcontent.val(data.rcontent);
             inputMreplyer.val(data.replyer);
-            $(".remove").attr("data-rno", rno);
-            $(".modify").attr("data-rno", rno);
+            $(".mremove").attr("data-rno", rno);
+            $(".mmodify").attr("data-rno", rno);
             }
         );
     }
@@ -368,7 +405,7 @@ list-style: none;
 
     function modify(rno){
 
-        var rno = $(".modify").attr("data-rno");
+        var rno = $(".mmodify").attr("data-rno");
         var data = {bno:bno, rcontent: inputMrcontent.val(), replyer: inputMreplyer.val()};
 
         $.ajax({
@@ -392,8 +429,12 @@ list-style: none;
         });
     }
     
+
     
-	  function displayTime(timeValue) {
+	  
+
+    function displayTime(timeValue) {
+
 		  
 		   var today = new Date();	  
 		   
@@ -433,6 +474,7 @@ list-style: none;
 		
     });
 	
+	
 	getPageList(bno, 1);
 	
 	$(".pageNation").on("click","li a",function (e) {
@@ -458,11 +500,11 @@ list-style: none;
 		$(".modalContent").show();
 		
 	});
-	$(".modalContent").on("click", ".close", function(e){
+	$(".modalContent").on("click", ".mclose", function(e){
 		$(".modalContent").hide();		
 	});	
 
-    $(".modalContent").on("click", ".remove", function (e) {
+    $(".modalContent").on("click", ".mremove", function (e) {
 
         var rno = $(this).attr("data-rno");
         
@@ -491,12 +533,12 @@ list-style: none;
             return false;
         });
 
-        $(".modalContent").on("click",".close",function(){
+        $(".modalContent").on("click",".mclose",function(){
             modalLayer.fadeOut("slow");
             modalLink.focus();
         });
 
-        $(".modalContent").on("click",".modify",function(){
+        $(".modalContent").on("click",".mmodify",function(){
             var rno = $(this).attr("data-rno");
             modalLayer.fadeOut("slow");
 

@@ -9,7 +9,7 @@ import lombok.Getter;
 @Getter
 public class BoardVO {
 
-	private Integer bno;
+	private Integer bno, recount;
 	private String title, content, writer;
 	private Date regdate, updatedate;
 
