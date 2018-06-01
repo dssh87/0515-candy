@@ -13,50 +13,40 @@
 
 <style>
 
-
 .search1 {
 	text-align: center;
 }
-
 .outer {
 	padding: 5%;
 	background-color: #ffffff;
 	background-color: rgba(255, 255, 255, 0.6);
 }
-
 .subpage {
 	background: linear-gradient(120deg, #D3959B, #BFE6BA) fixed
 }
-
 .center {
 	text-align: center;
 }
-
 .pagination {
 	display: inline-block;
 }
-
 .pagination a {
 	color: black;
 	float: left;
 	padding: 8px 5px;
 	text-decoration: none;
 }
-
 .pagination a.active {
 	background-color: pink;
 	color: white;
 }
-
 .pagination a :hover :not(.active){
 background-color:pink;
 }
-
 .search {
 	width: 33%;
 	margin-left: 33%;
 }
-
 .box {
 	display: block;
 	background-color: transparent;
@@ -66,7 +56,6 @@ background-color:pink;
 	margin-bottom: 0;
 	cursor: pointer;
 }
-
 .title {
 	display: inline-block;
 	overflow: hidden;
@@ -75,7 +64,6 @@ background-color:pink;
 	text-overflow: ellipsis;
 	vertical-align: middle;
 }
-
 .ico {
 	display: inline-block;
 	vertical-align: middle;
@@ -83,7 +71,11 @@ background-color:pink;
 #selectbox{
     display: block;
     width:100%;
-
+}
+.recnt{
+color: #eb0000;
+font-size: 15px;
+font-weight: 500;
 }
 
 
@@ -148,7 +140,7 @@ background-color:pink;
 								<td class="box" data-bno='${vo.bno}' ><span class="title"> <c:out
 											value="${vo.title}"  />
 								</span>
-								<span class="recount">[<strong><c:if test="${vo.recount}"></c:if></strong>]
+								<span class="recnt">[${vo.recnt}]
 								</span> 
 								<span class="ico"> <c:if test="${vo.checkNew()}">
 											<img src="/resources/images/new.gif">

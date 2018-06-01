@@ -21,10 +21,10 @@
 
 	<select id="list" resultType="org.zerock.domain.BoardVO">
 
-		select bno,title,writer,regdate,updatedate
+		select bno, title, writer, regdate, updatedate, recnt
 		from tbl_aboard 
 		<include refid="search"></include>
-		order by bno desc limit #{skip},10
+		order by bno desc limit #{skip}, 10
 
 	</select>
 
@@ -55,5 +55,10 @@
 	update tbl_aboard set title=#{title}, content = #{content} , writer = #{writer}, updatedate = now()
 	 where bno = #{bno}
 	
+	</update>
+	
+	<update id="updateReplyCnt">
+		update tbl_aboard set recnt = recnt + #{amount} where bno = #{bno}  
+		
 	</update>
 </mapper>

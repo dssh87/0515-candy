@@ -52,4 +52,10 @@ public class BoardServiceImp implements BoardService{
 		return mapper.modify(vo);
 	}
 
+	@Override
+	public void updateReplyCnt(Integer bno, Integer amount) {
+
+		
+	}
+
 }

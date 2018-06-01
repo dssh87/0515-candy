@@ -19,6 +19,8 @@ public class ReplyServiceTests {
 
 	@Setter(onMethod_= {@Autowired})
 	private ReplyService service;
+	@Setter(onMethod_= {@Autowired})
+	private BoardMapper mapper;
 	
 	@Test
 	public void testList() {
@@ -45,6 +47,18 @@ public class ReplyServiceTests {
 	@Test
 	public void testRemove() {
 		service.remove(100);
+	}
+	
+	@Test
+	public void testAddReply() {
+		mapper.updateReplyCnt(1, 1);
+		ReplyVO vo = new ReplyVO();
+		
+		vo.setBno(1);
+		vo.setRcontent("되나");
+		vo.setReplyer("들어가");
+		
+		service.insert(vo);
 	}
 	
 }

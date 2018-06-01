@@ -13,4 +13,6 @@ public interface BoardService {
 	public int remove(int bno);
 	public int insert(BoardVO vo);
 	public int modify(BoardVO vo);
+	
+	public void updateReplyCnt(Integer bno, Integer amount);
 }

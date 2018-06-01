@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.ReplyVO;
 import org.zerock.mapper.BoardMapper;
@@ -15,6 +16,9 @@ public class ReplyServiceImpl implements ReplyService {
 
 	@Setter(onMethod_= {@Autowired})
 	private ReplyMapper reply;
+	
+	@Setter(onMethod_= {@Autowired})
+	private BoardMapper mapper;
 	
 	@Override
 	public List<ReplyVO> list(Integer bno, Criteria cri) {
@@ -28,11 +32,12 @@ public class ReplyServiceImpl implements ReplyService {
 		return reply.getCount(bno);
 	}
 
-	@Override
+	
+	/*@Override
 	public int insert(ReplyVO vo) {
 		
-		return reply.insert(vo);
-	}
+		return reply.insert(vo); 
+	}*/
 
 	@Override
 	public ReplyVO view(Integer rno) {
@@ -46,10 +51,26 @@ public class ReplyServiceImpl implements ReplyService {
 		return reply.modify(vo);
 	}
 
-	@Override
+	/*@Override
 	public int remove(Integer rno) {
 
 		return reply.remove(rno);
+	}*/
+	
+	@Transactional
+	@Override
+	public void insert(ReplyVO vo) {
+		mapper.updateReplyCnt(vo.getBno(), 1);
+		reply.insert(vo); 
 	}
+	@Transactional
+	@Override
+	public void remove(Integer rno) {
+
+		int bno = reply.getBno(rno);
+		reply.remove(rno);
+		mapper.updateReplyCnt(bno, -1);
+	}
+
 
 }
