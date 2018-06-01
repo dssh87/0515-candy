@@ -28,7 +28,6 @@
 		<property name="minimumIdle" value="3"></property>
 
 	</bean>
-
 	<!-- HikariCP configuration -->
 	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
 		destroy-method="close">
