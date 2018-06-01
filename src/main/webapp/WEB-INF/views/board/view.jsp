@@ -19,17 +19,14 @@
 .contentbox {
 	min-height: 200px;
 }
-
 .mytable {
 	width: 70%;
 	margin-left: auto;
 	margin-right: auto;
 }
-
 .subpage {
 	background: linear-gradient(120deg, #D3959B, #BFE6BA) fixed
 }
-
 .outer {
 	padding-top: 5%;
 	background-color: #ffffff;

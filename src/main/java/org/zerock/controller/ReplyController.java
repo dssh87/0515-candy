@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -89,11 +90,11 @@ public class ReplyController {
 	}
 
 	@DeleteMapping("/{rno}")
-	public ResponseEntity<String> remove(@PathVariable("rno") Integer rno) {
+	public ResponseEntity<Integer> remove(@PathVariable("rno") Integer rno) {
 
-		String msg = service.remove(rno) == 1 ? "success" : "fail";
-
-		return new ResponseEntity<String>(msg, HttpStatus.OK);
+		service.remove(rno);
+		
+		return new ResponseEntity<Integer>(rno, HttpStatus.OK) ;
 
 	}
 

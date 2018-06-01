@@ -19,5 +19,7 @@ public interface ReplyMapper {
 	public int modify(ReplyVO vo);
 
 	public int remove(Integer rno);
+	
+	public int getBno(Integer rno);
 
 }
