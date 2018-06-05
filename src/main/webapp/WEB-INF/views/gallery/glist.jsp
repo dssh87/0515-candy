@@ -3,30 +3,45 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<!--
-	Hielo by TEMPLATED
+<!--Hielo by TEMPLATED
 	templated.co @templatedco
 	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
 -->
 <html>
 
 <style>
+#wall{
+position:fixed;
+z-index: 100;
+width: 100%;
+height: 100px; 
+left: 5px;
+top: 30px;
+
+}
 .allpic {
 	display: inline-block;
 }
 
-li {
+.allpic li {
 	list-style: none;
 	width: 18%;
 	text-align: center;
 	float: left;
-	margin-right: 15px;
+	margin: 0 10px 10px 0;
 }
 
-li img {
+.allpic li img {
 	max-width: 100%;
 	height: auto;
 }
+
+.pageNation li {
+	list-style: none;
+	display: inline-block;
+	text-align: center;
+	
+	}
 </style>
 <head>
 <title>Hielo by TEMPLATED</title>
@@ -71,16 +86,10 @@ li img {
 			<header class="align-center">
 				<p class="special">Poohson777 Zzang CandyJellyLove</p>
 				<h2>Gallery</h2>
-			<div id = 'wall'></div>
+			<div id= 'wall'></div>
 			</header>
 
-			<div class="allpic" >
-			<tbody>
-						<c:forEach items="${list}" var="vo"/>
-							<tr >
-								<td><c:out value="${vo.bno}" /></td>
-								</tr></tbody>
-			
+			<div class="allpic">
 			</div>
 
 			<form id="uploadForm" style="margin-bottom: 5px;">
@@ -90,6 +99,7 @@ li img {
 				<button id='btn'>upload</button>
 			</div>
 		</div>
+			<div class="pageNation"></div>
 
 	</section>
 
@@ -100,46 +110,42 @@ li img {
 
 	<script>
 	$(document).ready(function () {
-var allpic = $(".allpic");
-var uploadInput = $("#upload");
-console.log("uploadInput...." , uploadInput[0].files);
-var wall = $("#wall");
+		var allpic = $(".allpic");
+		var uploadInput = $("#upload");
+		console.log("uploadInput...." , uploadInput[0].files);
+		var wall = $("#wall");
+		var pageNation = $(".pageNation");
 
-$('#btn').on("click", function(e){
-	
-	console.log("click....");
-	
-	var formData = new FormData();
-	console.log("uploadInput222...." , uploadInput[0].files);
-	console.log(uploadInput[0].files);
-	
-	var files = uploadInput[0].files;
-	
-	for(var i = 0; i < files.length; i++ ){
+	$('#btn').on("click", function(e){
 		
-		formData.append("file", files[i]);
-	}
-	
-	$.ajax({ 
-		url: 'gallery', 
-		data: formData, 
-		processData: false, 
-		contentType: false, 
-		type: 'POST', 
-		success: function(data){ 
-			console.log("return data : ", data); 
+		console.log("click....");
+		
+		var formData = new FormData();
+		console.log("uploadInput222...." , uploadInput[0].files);
+		console.log(uploadInput[0].files);
+		
+		var files = uploadInput[0].files;
+		
+		for(var i = 0; i < files.length; i++ ){
 			
-			var str ="";
-			
-			for(var i = 0; i < data.length; i++){
-				str += "<li data-file='"+data[i]+"'><img src='/gallery/display?file=s_" + data[i]+"'></li>";
-
-			}
-			
-			allpic.append(str);
-			
-			$("#uploadForm")[0].reset();			
+			formData.append("file", files[i]);
 		}
+		
+		$.ajax({ 
+			url: 'glist', 
+			data: formData, 
+			processData: false, 
+			contentType: false, 
+			type: 'POST', 
+			success: function(data){ 
+				console.log("return data : ", data); 
+				
+				getPageList(1);
+				
+				$("#uploadForm")[0].reset();			
+			}
+		});		
+	
 	});
 	
 	$(".allpic").on("click", "li", function(e){
@@ -151,11 +157,64 @@ $('#btn').on("click", function(e){
 		var str = "<img src='/gallery/display?file="+fileName+"'>";
 		
 		wall.html(str);
-		wall.show('slow');
+		wall.show();
 		
 	});
+	
+		wall.on("click", function(e){
+        
+        wall.hide();
+        
+    });
+	
+	
+	
+	function getPageList(page) {
+        var page = page || 1;
+        
+        
+        $.getJSON("/gallery/glist/"+page+".json", function (data) {
+      	  console.log("length",data.length);
+      	  console.log("data",data);
+      	  console.dir(data);
+            var str = "";
+
+            $(data.list).each(function (idx, data) {
+
+            	str += "<li data-file='"+data.fullName+"'><img src='/gallery/display?file=s_" + data.fullName+"'></li>";
+            });
+            
+            allpic.html(str);
+            
+            printPaging(data.pm);
+        });
+    }
+    
+    
+    function printPaging(pm){
+        console.log("pm이다1111",pm);
+
+        var str = "";
+
+        if(pm.prev){
+            str += "<li><a href="+(pm.start-1)+"> << </a></li>";
+        }
+
+        for(var i = pm.start, len = pm.end; i <=len; i++) {
+            var strClass = pm.cri.page == i ? "class = active" : "";
+            str+="<li "+strClass+"><a href="+i+">"+i+"</a></li>";
+        }
+
+
+         if(pm.next){
+            str += "<li><a href="+(pm.end + 1)+"> >> </a></li>";
+        }
+        pageNation.html(str);
+    }
+    
+    getPageList(1);
+
 });
-	});
 	
 	</script>
 

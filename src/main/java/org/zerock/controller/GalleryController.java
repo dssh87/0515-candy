@@ -35,16 +35,15 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 @RequestMapping("/gallery/*")
 @Log4j
-public class GalleryController {
-
-	
+public class GalleryController {	
 
 	@Setter(onMethod_ = { @Autowired })
 	private GalleryService service;
 
-	@GetMapping("/gallery/{page}")
+	@GetMapping("/glist/{page}")
 	public ResponseEntity<Map<String, Object>> listPage(@PathVariable("page") Integer page) {
 		ResponseEntity<Map<String, Object>> entity = null;
+		log.info("page..."+page);
 
 		try {
 			Criteria cri = new Criteria(page);
@@ -66,7 +65,7 @@ public class GalleryController {
 
 		return entity;
 	}
-	@GetMapping("/gallery")
+	@GetMapping("/glist")
 	public void read() {
 		
 	}
@@ -96,7 +95,7 @@ public class GalleryController {
 		return result;
 	}
 	
-	@PostMapping(value="/gallery", produces="application/json")
+	@PostMapping(value="/glist", produces="application/json")
 	public @ResponseBody ResponseEntity<List<String>> uploadAjaxFiles(MultipartFile[] file ) throws Exception{
 		
 		log.info(Arrays.toString(file));
