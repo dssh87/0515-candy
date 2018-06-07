@@ -7,14 +7,10 @@
 <mapper namespace="org.zerock.mapper.GalleryMapper">
 
 	<insert id="addGallery">
-
 		insert into tbl_gallery (fullName) values (#{fullName})
-
 	</insert>
-
-
+	
 	<select id="readGallery" resultType="org.zerock.domain.GalleryVO">
-
 		select * from tbl_gallery where gno = #{gno}
 	</select>
 
@@ -25,9 +21,12 @@
 	</select>
 	
 	<select id="getCount" resultType="int">
-		select count(*) from tbl_gallery
-		
+		select count(*) from tbl_gallery		
 	</select>
+	
+	<delete id="remove">
+		delete from tbl_gallery where gno = #{gno}
+	</delete>
 
 
 </mapper>

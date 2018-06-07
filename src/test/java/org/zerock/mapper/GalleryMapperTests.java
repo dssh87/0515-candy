@@ -44,4 +44,9 @@ public class GalleryMapperTests {
 		mapper.getCount(new Criteria(1));
 	}
 	
+	@Test
+	public void removeTest() {
+		mapper.remove(15);
+	}
+	
 }

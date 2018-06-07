@@ -15,4 +15,6 @@ public interface GalleryMapper {
 	public List<GalleryVO> list(@Param("cri") Criteria cri);
 	
 	public int getCount(Criteria cri);
+	
+	public int remove(int gno);
 }

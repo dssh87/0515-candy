@@ -10,38 +10,67 @@
 <html>
 
 <style>
-#wall{
-position:fixed;
-z-index: 100;
-width: 100%;
-height: 100px; 
-left: 5px;
-top: 30px;
-
+#wall img{
+	position:fixed;
+	margin-left:15%;
+	z-index: 100;
+	width: 70%;
+	height: 50%; 
+	left: 10px;
+	top: 200px;
 }
+
 .allpic {
 	display: inline-block;
 }
 
-.allpic li {
+.allpic li{
 	list-style: none;
 	width: 18%;
 	text-align: center;
 	float: left;
-	margin: 0 10px 10px 0;
+	margin: 0 5px 5px 0;
 }
 
-.allpic li img {
+.allpic li img{
 	max-width: 100%;
 	height: auto;
 }
 
-.pageNation li {
-	list-style: none;
-	display: inline-block;
+.pageNation{
+	display: block;
 	text-align: center;
 	
-	}
+}
+.pageNation li {
+	display: inline-block;
+}
+
+.pageNation a {
+	color: black;
+	float: left;
+	padding: 8px 5px;
+	text-decoration: none;
+}
+
+.pageNation .active {
+	background-color: pink;
+	color: white;
+}
+
+.pageNation :hover :not(.active){
+	background-color:pink;
+}
+
+
+.outer {
+	padding-top: 5%;
+	background-color: #ffffff;
+	background-color: rgba(255, 255, 255, 0.6);
+}
+	
+
+	
 </style>
 <head>
 <title>Hielo by TEMPLATED</title>
@@ -62,10 +91,11 @@ top: 30px;
 	<!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
-			<li><a href="index">Home</a></li>
-			<li><a href="generic">Generic</a></li>
-			<li><a href="elements">Elements</a></li>
-			<li><a href="list">List</a></li>
+			<li><a href="/board/index">Home</a></li>
+			<li><a href="/board/generic">Generic</a></li>
+			<li><a href="/board/elements">Elements</a></li>
+			<li><a href="/board/list">list</a></li>
+			<li><a href="/gallery/glist">gallery</a></li>
 		</ul>
 	</nav>
 
@@ -81,11 +111,13 @@ top: 30px;
 	</section>
 
 	<!-- Three -->
+	<div class="container">
+		<div class="outer">
 	<section id="three" class="wrapper style2">
+	
 		<div class="inner">
 			<header class="align-center">
-				<p class="special">Poohson777 Zzang CandyJellyLove</p>
-				<h2>Gallery</h2>
+			
 			<div id= 'wall'></div>
 			</header>
 
@@ -102,6 +134,8 @@ top: 30px;
 			<div class="pageNation"></div>
 
 	</section>
+	</div></div>
+	
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -115,6 +149,7 @@ top: 30px;
 		console.log("uploadInput...." , uploadInput[0].files);
 		var wall = $("#wall");
 		var pageNation = $(".pageNation");
+		var repage = 1;
 
 	$('#btn').on("click", function(e){
 		
@@ -181,8 +216,11 @@ top: 30px;
 
             $(data.list).each(function (idx, data) {
 
-            	str += "<li data-file='"+data.fullName+"'><img src='/gallery/display?file=s_" + data.fullName+"'></li>";
+            	str += "<li data-file='"+data.fullName+"'>"+"<img src=/gallery/display?file=s_" + data.fullName+
+            			"><strong data-gno='"+data.gno+"'>x</strong></li>";
             });
+                        
+            console.log("str..",str)
             
             allpic.html(str);
             
@@ -205,7 +243,6 @@ top: 30px;
             str+="<li "+strClass+"><a href="+i+">"+i+"</a></li>";
         }
 
-
          if(pm.next){
             str += "<li><a href="+(pm.end + 1)+"> >> </a></li>";
         }
@@ -213,6 +250,44 @@ top: 30px;
     }
     
     getPageList(1);
+    
+    function remove(gno) {
+
+        $.ajax({
+            type:'delete',
+            url:"/gallery/"+gno,
+            headers: {
+                "Content-type": "application/json",
+                "X-HTTP-Method-Override": "DELETE"
+            },
+            dataType:"text",
+            success:function(result){
+                console.log("result: ",result);
+                
+                getPageList(1);
+            }
+        });
+    }
+    
+    $(".allpic").on("click","strong", function(e){
+    	console.log("remove...");   	
+    	
+    	e.stopPropagation();
+    	var gno = $(this).attr("data-gno");
+    	remove(gno);
+    });    
+    
+    $(".pageNation").on("click","li a",function (e) {
+
+		console.log("클릭")
+        e.preventDefault();
+
+        repage = $(this).attr("href");
+        console.log(repage);
+        
+        getPageList(repage);
+
+    });
 
 });
 	

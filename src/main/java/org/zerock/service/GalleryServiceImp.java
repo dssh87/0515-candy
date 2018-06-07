@@ -46,4 +46,11 @@ public class GalleryServiceImp  implements GalleryService {
 		return mapper.getCount(cri);
 	}
 
+
+	@Override
+	public int remove(int gno) {
+
+		return mapper.remove(gno);
+	}
+
 }

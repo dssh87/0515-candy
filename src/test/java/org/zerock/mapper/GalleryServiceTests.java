@@ -45,5 +45,10 @@ public class GalleryServiceTests {
 		
 		service.getCount(new Criteria(1));
 	}
+	
+	@Test
+	public void removeTest() {
+		service.remove(16);
+	}
 }
 
