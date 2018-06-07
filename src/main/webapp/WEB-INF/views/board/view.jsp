@@ -128,9 +128,11 @@ float: right;
 	<!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
-			<li><a href="index.html">Home</a></li>
-			<li><a href="generic.html">Generic</a></li>
-			<li><a href="elements.html">Elements</a></li>
+			<li><a href="index">Home</a></li>
+			<li><a href="generic">Generic</a></li>
+			<li><a href="elements">Elements</a></li>
+			<li><a href="list">list</a></li>
+			<li><a href="/gallery/glist">gallery</a></li>
 		</ul>
 	</nav>
 	<!-- One -->
@@ -308,7 +310,8 @@ float: right;
 						"<th>"+displayTime(data.regdate)+"</th>"+"<button type='button' class='modalLink' data-rno="+data.rno+"> 수정</button></tr></div></li>";
 
                       "<div>"+"<tr><th><strong>"+data.replyer+"</strong></th><br>"+"<th>"+data.rcontent+"</th>"+
-						"<div class='tmright'><th>"+displayTime(data.regdate)+"</th>"+"<button type='button' class='modalLink' data-rno="+data.rno+"> 수정</button></div></tr><hr></div></li>";
+						"<div class='tmright'><th>"+displayTime(data.regdate)+"</th>"+
+						"<button type='button' class='modalLink' data-rno="+data.rno+"> 수정</button></div></tr><hr></div></li>";
                   
 
               });

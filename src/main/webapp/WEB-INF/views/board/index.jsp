@@ -78,6 +78,69 @@
 						</header>
 					</div>
 				</article>
+								<article>
+					<img src="/resources/images/slide02.jpg" alt="" />
+					<div class="inner">
+						<header>
+							<p>Lorem ipsum dolor sit amet nullam feugiat</p>
+							<h2>Magna etiam</h2>
+						</header>
+					</div>
+				</article>
+								<article>
+					<img src="/resources/images/slide02.jpg" alt="" />
+					<div class="inner">
+						<header>
+							<p>Lorem ipsum dolor sit amet nullam feugiat</p>
+							<h2>Magna etiam</h2>
+						</header>
+					</div>
+				</article>
+								<article>
+					<img src="/resources/images/slide02.jpg" alt="" />
+					<div class="inner">
+						<header>
+							<p>Lorem ipsum dolor sit amet nullam feugiat</p>
+							<h2>Magna etiam</h2>
+						</header>
+					</div>
+				</article>
+								<article>
+					<img src="/resources/images/slide02.jpg" alt="" />
+					<div class="inner">
+						<header>
+							<p>Lorem ipsum dolor sit amet nullam feugiat</p>
+							<h2>Magna etiam</h2>
+						</header>
+					</div>
+				</article>
+								<article>
+					<img src="/resources/images/slide02.jpg" alt="" />
+					<div class="inner">
+						<header>
+							<p>Lorem ipsum dolor sit amet nullam feugiat</p>
+							<h2>Magna etiam</h2>
+						</header>
+					</div>
+				</article>
+								<article>
+					<img src="/resources/images/slide02.jpg" alt="" />
+					<div class="inner">
+						<header>
+							<p>Lorem ipsum dolor sit amet nullam feugiat</p>
+							<h2>Magna etiam</h2>
+						</header>
+					</div>
+				</article>
+								<article>
+					<img src="/resources/images/slide02.jpg" alt="" />
+					<div class="inner">
+						<header>
+							<p>Lorem ipsum dolor sit amet nullam feugiat</p>
+							<h2>Magna etiam</h2>
+						</header>
+					</div>
+				</article>
 			</section>
 
 		<!-- One -->

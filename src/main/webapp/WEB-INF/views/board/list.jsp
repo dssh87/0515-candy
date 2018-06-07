@@ -98,6 +98,7 @@ font-weight: 500;
 			<li><a href="generic">Generic</a></li>
 			<li><a href="elements">Elements</a></li>
 			<li><a href="list">list</a></li>
+			<li><a href="/gallery/glist">gallery</a></li>
 		</ul>
 	</nav>
 	<!-- One -->
@@ -268,6 +269,12 @@ font-weight: 500;
 
 		history.replaceState({}, null, null);				
 	});
+  
+  $(".gallery").on("click", function(e){
+	  console.log("click...gallery");
+		 self.location="/gallery/glist";
+	  
+  });
   
   </script>
 
