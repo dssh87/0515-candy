@@ -29,4 +29,36 @@ public class BoardMapperTests {
 		
 	}
 	
+	@Test
+	public void testView() {
+		
+		mapper.view(3);
+	}
+	@Test
+	public void testInsert() {
+		BoardVO vo = new BoardVO();
+		vo.setTitle("진주");
+		vo.setContent("원기");
+		vo.setWriter("바보");
+		
+		mapper.insert(vo);
+	}
+	
+	@Test
+	public void testRemove() {
+		
+		mapper.remove(1507334);
+	}
+	
+	@Test
+	public void testModify() {
+		BoardVO vo = new BoardVO();
+		
+		vo.setBno(1507382);
+		vo.setTitle("상현");
+		vo.setContent("원기");
+		vo.setWriter("바보");
+				
+		mapper.modify(vo);
+	}
 }

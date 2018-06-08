@@ -1,10 +1,18 @@
 package org.zerock.domain;
 
-import lombok.Getter;
-import lombok.ToString;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
-@Getter
+import org.springframework.web.util.UriComponents;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import lombok.Data;
+import lombok.ToString;
+import lombok.extern.log4j.Log4j;
+
 @ToString
+@Data
+@Log4j
 public class PageMaker {
 
 	private boolean prev, next;
@@ -27,8 +35,8 @@ public class PageMaker {
 		this.cri = cri;
 		this.total = total;
 
-		this.page = cri.getPage() > 0 ? cri.getPage() : 1;
-
+		this.page = cri.getPage() > 0? cri.getPage() : 1;
+		
 		int tempLast = (int) (Math.ceil(page / 10.0) * 10);
 
 		this.start = tempLast - 9;
@@ -37,9 +45,60 @@ public class PageMaker {
 
 		if (tempLast * 10 >= total) {
 			tempLast = (int) (Math.ceil(total / 10.0));
-		} else {
+		}
+		else {
 			this.next = true;
 		}
 		this.end = tempLast;
 	}
+
+	public PageMaker(Criteria cri) {
+
+		this.cri = cri;
+	}
+
+	public String makeURL(int page) {
+
+		StringBuilder builder = new StringBuilder();
+
+		builder.append("page=");
+		builder.append(page);
+
+
+		if (cri.getType() != null && cri.getType() != "") {
+
+			builder.append("&");
+			builder.append("type=");
+			builder.append(cri.getType());
+		}
+
+
+		if (cri.getKeyword() != null && cri.getKeyword() != "") {
+
+			builder.append("&");
+			builder.append("keyword=");
+			builder.append(encoding(cri.getKeyword()));
+		}
+
+		return builder.toString();
+	}
+
+	private String encoding(String keyword) {
+
+		if (keyword == null || keyword.trim().length() == 0) {
+			return "";
+		}
+		try {
+			return URLEncoder.encode(keyword, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			return "";
+		}
+	}
+
+	public String makeQuery(int page) {
+		UriComponents uriComponents = UriComponentsBuilder.newInstance().queryParam("page", page).build();
+		return uriComponents.toUriString();
+
+	}
+
 }

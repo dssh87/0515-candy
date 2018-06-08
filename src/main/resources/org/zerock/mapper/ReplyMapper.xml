@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.ReplyMapper">
+
+	<select id="list" resultType="org.zerock.domain.ReplyVO">
+		select *
+		from tbl_areply
+		where bno=#{bno}
+		order by rno desc limit #{cri.skip},10
+	</select>
+
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_areply where bno = #{bno}
+	</select>
+
+	<insert id="insert" parameterType="org.zerock.domain.ReplyVO">
+		insert into tbl_areply(bno, rcontent, replyer)
+		values (#{bno}, #{rcontent},
+		#{replyer})
+	</insert>
+
+	<select id="view" resultType="org.zerock.domain.ReplyVO">
+		select * from tbl_areply where rno = #{rno}
+	</select>
+
+
+	<update id="modify" parameterType="org.zerock.domain.ReplyVO">
+		update tbl_areply set rcontent = #{rcontent}, replyer = #{replyer} 
+		where rno = #{rno}
+	</update>
+
+	<delete id="remove">
+		delete from tbl_areply where rno = #{rno}
+	</delete>
+
+	<select id="getBno" resultType="int">
+		select bno from tbl_areply where rno = #{rno}
+	</select>
+</mapper>

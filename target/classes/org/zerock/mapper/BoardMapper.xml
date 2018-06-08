@@ -6,13 +6,54 @@
 
 <mapper namespace="org.zerock.mapper.BoardMapper">
 
-<select id="list" resultType="org.zerock.domain.BoardVO">
-select * from tbl_aboard order by bno asc limit ${skip},10
-</select>
+	<sql id="search">
+
+		<where>
+			<if test="arr !=null">
+				<foreach collection="arr"  item="target" open="("  close=")" separator="OR " >
+					<if test="target eq 't'.toString()">title like concat('%',#{keyword},'%')</if>
+					<if test="target eq 'c'.toString()">content like concat('%',#{keyword},'%')</if>
+					<if test="target eq 'w'.toString()">writer like concat('%',#{keyword},'%')</if>
+				</foreach>
+			</if>
+		</where>
+	</sql>
+
+	<select id="list" resultType="org.zerock.domain.BoardVO">
+
+		select bno,title,writer,regdate,updatedate
+		from tbl_aboard 
+		<include refid="search"></include>
+		order by bno desc limit #{skip},10
+
+	</select>
 
 
-<select id="getCount" resultType="int">
-select count(*) from tbl_aboard
-</select>
+	<select id="getCount" resultType="int">
+		select count(*) from tbl_aboard 
+		<include refid="search"></include>
+	</select>
+	
+	<select id="view" resultType="org.zerock.domain.BoardVO">
+	
+	select * from tbl_aboard where bno = #{bno}
+	
+	</select>
+	
+	<insert id="insert" parameterType="org.zerock.domain.BoardVO">
+        insert into tbl_aboard (title,content,writer)
+        values (#{title}, #{content}, #{writer})
+    </insert>
+	
+	<delete id="remove" >
+	
+	delete from tbl_aboard where bno = #{bno}
+	</delete>
 
+	<update id="modify" parameterType="org.zerock.domain.BoardVO">
+	
+	update tbl_aboard set title=#{title}, content = #{content} , writer = #{writer}, updatedate = now()
+	 where bno = #{bno}
+	
+	</update>
 </mapper>

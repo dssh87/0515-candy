@@ -26,4 +26,27 @@ public class BoardServiceTests {
 		service.list(new Criteria(3));
 		
 	}
+	
+	@Test
+	public void testView() {
+		log.info("나오나~~~~~~~~~~~~~~"+service.view(3));
+	}
+	
+	@Test
+	public void testRemove() {
+		
+		service.remove(1507337);
+	}
+	
+	@Test
+	public void testModify() {
+		BoardVO vo = new BoardVO();
+		
+		vo.setBno(1507377);
+		vo.setTitle("원기");
+		vo.setContent("원기");
+		vo.setWriter("바보");
+				
+		service.modify(vo);
+	}
 }
