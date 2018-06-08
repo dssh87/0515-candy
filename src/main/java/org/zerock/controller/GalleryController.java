@@ -4,6 +4,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -16,17 +18,15 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.GalleryVO;
 import org.zerock.domain.PageMaker;
@@ -43,6 +43,20 @@ public class GalleryController {
 
 	@Setter(onMethod_ = { @Autowired })
 	private GalleryService service;
+	
+	private boolean checkImageType(File file) {
+
+        try {
+            String contentType = Files.probeContentType(file.toPath());
+
+            return contentType.startsWith("image");
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return false;
+    }
 
 	@GetMapping("/glist/{page}")
 	public ResponseEntity<Map<String, Object>> listPage(@PathVariable("page") Integer page) {
@@ -58,7 +72,7 @@ public class GalleryController {
 
 			int galCount = service.getCount(cri);
 
-			map.put("pm", new PageMaker(cri, galCount));
+			map.put("pm", new PageMaker(cri, galCount));			
 
 			entity = new ResponseEntity<Map<String, Object>>(map, HttpStatus.OK);
 
@@ -93,16 +107,15 @@ public class GalleryController {
 		
 		ResponseEntity<byte[]> result = 
 				new ResponseEntity<>(baos.toByteArray(),headers,
-						HttpStatus.OK);
-		
+						HttpStatus.OK);		
 		
 		return result;
 	}
 	
 	@PostMapping(value="/glist", produces="application/json")
-	public @ResponseBody ResponseEntity<List<String>> uploadAjaxFiles(MultipartFile[] file ) throws Exception{
-		
-		log.info(Arrays.toString(file));
+	public @ResponseBody ResponseEntity<List<String>> uploadAjaxFiles(MultipartFile[] file, Model model) throws Exception{
+		ResponseEntity<String> entity = null;
+		log.info("file..."+Arrays.toString(file));
 		
 		List<String> uploadNames = new ArrayList<String>();
 		
@@ -115,6 +128,9 @@ public class GalleryController {
 			
 			String uploadFileName = uid.toString()+"_"+upfile.getOriginalFilename();
 			
+			try {
+				File saveFile = new File("C:\\zzz\\upload", uploadFileName);
+				if (checkImageType(saveFile)) {
 			FileOutputStream fos = 
 					new FileOutputStream( new File("C:\\zzz\\upload",
 						uploadFileName	) );
@@ -124,24 +140,30 @@ public class GalleryController {
 			FileCopyUtils.copy(upfile.getInputStream(), fos);
 			fos.close();
 			
-			//make thumbnail
-			
-			FileOutputStream thfos = 
-				new FileOutputStream(
-				 new File("C:\\zzz\\upload", 
-						 "s_" + uploadFileName)
-				);
-			
-			Thumbnailator.createThumbnail(
-					upfile.getInputStream(), 
-					thfos, 120,120);
-			thfos.close();
-			
-			uploadNames.add(uploadFileName);		
-		}
-		
-		return new ResponseEntity<List<String>>(uploadNames, HttpStatus.OK);
-		
+			//make thumbnail			
+				
+				FileOutputStream thfos = 
+					new FileOutputStream(
+					 new File("C:\\zzz\\upload", 
+							 "s_" + uploadFileName)
+					);
+				
+				Thumbnailator.createThumbnail(
+						upfile.getInputStream(), 
+						thfos, 250,200);
+				thfos.close();
+				}
+				uploadNames.add(uploadFileName);
+				uploadNames.add("success");
+				
+				
+			}catch (Exception e) {
+				e.printStackTrace();
+				uploadNames.add("fail");
+			}			
+			log.info("up2..."+upfile.getOriginalFilename());	
+		}		
+		return new ResponseEntity<List<String>>(uploadNames, HttpStatus.OK);		
 	}
 	
 	@DeleteMapping("/{gno}")

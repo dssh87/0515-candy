@@ -278,7 +278,6 @@ float: right;
 });
   /* function */
   
-  
   $(document).ready(function () {
 
 	  var bno = ${view.bno};
@@ -291,7 +290,7 @@ float: right;
 
       var reply = $(".reply");      
       var repage = 1;
-
+      
       function getPageList(bno, page) {
           var page = page || 1;
           var bno = bno || 1;
@@ -305,15 +304,10 @@ float: right;
               $(data.list).each(function (idx,data) {
 
                   str += "<li data-rno="+data.rno+">"+
-
-                      "<div>"+"<th>"+data.rcontent+"</th>"+"<th>"+data.replyer+"</th>"+
-						"<th>"+displayTime(data.regdate)+"</th>"+"<button type='button' class='modalLink' data-rno="+data.rno+"> 수정</button></tr></div></li>";
-
                       "<div>"+"<tr><th><strong>"+data.replyer+"</strong></th><br>"+"<th>"+data.rcontent+"</th>"+
 						"<div class='tmright'><th>"+displayTime(data.regdate)+"</th>"+
 						"<button type='button' class='modalLink' data-rno="+data.rno+"> 수정</button></div></tr><hr></div></li>";
                   
-
               });
               
               listDiv.html(str);
@@ -429,12 +423,7 @@ float: right;
         });
     }
     
-
-    
-	  
-
     function displayTime(timeValue) {
-
 		  
 		   var today = new Date();	  
 		   

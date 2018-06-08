@@ -10,6 +10,13 @@
 <html>
 
 <style>
+#three{
+	border-radius: 3%;
+	background-color: #ffffff;
+	background-color: rgba(255, 255, 255, 0.6);
+
+}
+
 #wall img{
 	position:fixed;
 	margin-left:15%;
@@ -20,21 +27,35 @@
 	top: 200px;
 }
 
+#wall .sumname{
+	position:fixed;
+	margin-left:15%;
+	z-index: 200;
+	width: 70%;
+	height: 50%; 
+	left: 10px;
+	top: 200px;
+	color: white;	
+	text-shadow: 0 0 2px black;
+}
+
 .allpic {
 	display: inline-block;
 }
 
 .allpic li{
 	list-style: none;
-	width: 18%;
+	width: 19%;
 	text-align: center;
-	float: left;
-	margin: 0 5px 5px 0;
+	float:left;
+	margin-left: 10px;
+	
 }
 
 .allpic li img{
-	max-width: 100%;
-	height: auto;
+	width: 200px;
+	height: 200px;
+	border-radius: 20%;
 }
 
 .pageNation{
@@ -67,27 +88,36 @@
 	padding-top: 5%;
 	background-color: #ffffff;
 	background-color: rgba(255, 255, 255, 0.6);
-}
-	
+}	
 
+.subpage {
+	background: linear-gradient(120deg, #D3959B, #BFE6BA) fixed
+}
+
+.outbtn{
+display:inline-block;
+text-align: center;
+}
+
+#uploadForm{
+float: left;
+}
 	
 </style>
 <head>
 <title>Hielo by TEMPLATED</title>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="stylesheet" href="/resources/css/main.css" />
-</head>
-<body>
-
+<link rel="stylesheet" href="/resources/css/main.css?ver=2" />
+<body class="subpage">
+	<!--  -->
 	<!-- Header -->
-	<header id="header" class="alt">
+	<header id="header">
 		<div class="logo">
-			<a href="/index">Hielo <span>by TEMPLATED</span></a>
+			<a href="index">Hielo <span>by TEMPLATED</span></a>
 		</div>
 		<a href="#menu">Menu</a>
 	</header>
-
 	<!-- Nav -->
 	<nav id="menu">
 		<ul class="links">
@@ -111,11 +141,11 @@
 	</section>
 
 	<!-- Three -->
+	<div id="main">
 	<div class="container">
-		<div class="outer">
-	<section id="three" class="wrapper style2">
+		
+	<section id="three" class="wrapper style2">	
 	
-		<div class="inner">
 			<header class="align-center">
 			
 			<div id= 'wall'></div>
@@ -123,19 +153,19 @@
 
 			<div class="allpic">
 			</div>
+			
+			<div class="pageNation"></div>
 
+		<center>	<div class='outbtn'>			
 			<form id="uploadForm" style="margin-bottom: 5px;">
 				<input type='file' id='upload' multiple>
 			</form>
-			<div>
-				<button id='btn'>upload</button>
+				<button id='btn'>upload</button>			
 			</div>
-		</div>
-			<div class="pageNation"></div>
+	</center>
 
 	</section>
 	</div></div>
-	
 
 
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -149,7 +179,76 @@
 		console.log("uploadInput...." , uploadInput[0].files);
 		var wall = $("#wall");
 		var pageNation = $(".pageNation");
-		var repage = 1;
+		var repage = 1;		
+		
+		function getPageList(page) {
+	        var page = page || 1;
+	        
+	        
+	        $.getJSON("/gallery/glist/"+page+".json", function (data) {
+	      	  
+	            var str = "";
+
+	            $(data.list).each(function (idx, data) {
+
+	            	str += "<li data-file='"+data.fullName+"'>"+"<img src=/gallery/display?file=s_" + data.fullName+
+	            			"><br>"+data.fullName.split('_')[1]+"<strong data-gno='"+data.gno+"'>x</strong></li>";
+	            });
+	                        
+	            console.log("str",str);
+	            
+	            allpic.html(str);
+	            
+	            printPaging(data.pm);
+	        });
+	    }
+	    
+	    
+	    function printPaging(pm){
+	        console.log("pm이다1111",pm);
+
+	        var str = "";
+
+	        if(pm.prev){
+	            str += "<li><a href="+(pm.start-1)+"> << </a></li>";
+	        }
+
+	        for(var i = pm.start, len = pm.end; i <=len; i++) {
+	            var strClass = pm.cri.page == i ? "class = active" : "";
+	            str+="<li "+strClass+"><a href="+i+">"+i+"</a></li>";
+	        }
+
+	         if(pm.next){
+	            str += "<li><a href="+(pm.end + 1)+"> >> </a></li>";
+	        }
+	        pageNation.html(str);
+	    }   
+	    
+	    
+	    function remove(gno) {
+
+	        $.ajax({
+	            type:'delete',
+	            url:"/gallery/"+gno,
+	            headers: {
+	                "Content-type": "application/json",
+	                "X-HTTP-Method-Override": "DELETE"
+	            },
+	            dataType:"text",
+	            success:function(result){
+	                console.log("result: ",result);
+	                
+	                getPageList(repage);
+	            }
+	        });
+	    }
+	    
+	    function getOriginalName(file){
+	    	
+	    	var idx = file.indexOf("_") + 1;
+	    	return file.substr(idx);
+	    }	   
+	    
 
 	$('#btn').on("click", function(e){
 		
@@ -174,6 +273,12 @@
 			type: 'POST', 
 			success: function(data){ 
 				console.log("return data : ", data); 
+				if(data[0]=="fail"){
+					alert("등록이 실패하였습니다."); 
+				}
+				if(data[1]=="success"){
+					alert("등록이 성공하였습니다."); 
+				}
 				
 				getPageList(1);
 				
@@ -188,86 +293,20 @@
 		console.log("pic clicked");
 		//$(this).attr("data-file")
 		var fileName = $(this).data("file");
+		var originName = $(this).data("file").split('_')[1];		
 		
-		var str = "<img src='/gallery/display?file="+fileName+"'>";
+		var str = "<div><img src=/gallery/display?file="+fileName+"></div><div class='sumname'>"+originName+"</div>";
 		
 		wall.html(str);
 		wall.show();
 		
 	});
 	
-		wall.on("click", function(e){
-        
-        wall.hide();
-        
+		wall.on("click", function(e){        
+        wall.hide();        
     });
 	
-	
-	
-	function getPageList(page) {
-        var page = page || 1;
-        
-        
-        $.getJSON("/gallery/glist/"+page+".json", function (data) {
-      	  console.log("length",data.length);
-      	  console.log("data",data);
-      	  console.dir(data);
-            var str = "";
 
-            $(data.list).each(function (idx, data) {
-
-            	str += "<li data-file='"+data.fullName+"'>"+"<img src=/gallery/display?file=s_" + data.fullName+
-            			"><strong data-gno='"+data.gno+"'>x</strong></li>";
-            });
-                        
-            console.log("str..",str)
-            
-            allpic.html(str);
-            
-            printPaging(data.pm);
-        });
-    }
-    
-    
-    function printPaging(pm){
-        console.log("pm이다1111",pm);
-
-        var str = "";
-
-        if(pm.prev){
-            str += "<li><a href="+(pm.start-1)+"> << </a></li>";
-        }
-
-        for(var i = pm.start, len = pm.end; i <=len; i++) {
-            var strClass = pm.cri.page == i ? "class = active" : "";
-            str+="<li "+strClass+"><a href="+i+">"+i+"</a></li>";
-        }
-
-         if(pm.next){
-            str += "<li><a href="+(pm.end + 1)+"> >> </a></li>";
-        }
-        pageNation.html(str);
-    }
-    
-    getPageList(1);
-    
-    function remove(gno) {
-
-        $.ajax({
-            type:'delete',
-            url:"/gallery/"+gno,
-            headers: {
-                "Content-type": "application/json",
-                "X-HTTP-Method-Override": "DELETE"
-            },
-            dataType:"text",
-            success:function(result){
-                console.log("result: ",result);
-                
-                getPageList(1);
-            }
-        });
-    }
     
     $(".allpic").on("click","strong", function(e){
     	console.log("remove...");   	
@@ -288,6 +327,8 @@
         getPageList(repage);
 
     });
+    
+    getPageList(1);
 
 });
 	

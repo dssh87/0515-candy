@@ -32,6 +32,7 @@ public class BoardController {
 
 		int totalCount = service.getCount(cri);
 		model.addAttribute("pm", new PageMaker(cri, totalCount));
+
 	}
 
 	@GetMapping("register")
